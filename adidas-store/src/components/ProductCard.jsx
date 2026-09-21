@@ -15,7 +15,7 @@ function ProductCard({ isNew, image, title, price, onCardClick, onBuyClick, onFa
             </div>
             
             <h3 onClick={onCardClick}>{title}</h3>
-            <p>{price} ₽</p>
+            <p>{price} <span className="currency-rub">₽</span></p>
             <button onClick={onBuyClick} className="buy-btn">Купить</button>
             <div className="product-card-actions">
                 <button 

@@ -75,7 +75,7 @@ function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], on
 
                         <div className="product-modal-right">
                             <h2 id="modalProductTitle">{displayProduct.title}</h2>
-                            <p className="modal-product-price" id="modalProductPrice">{displayProduct.price} ₽</p>
+                            <p className="modal-product-price" id="modalProductPrice">{displayProduct.price} <span className="currency-rub">₽</span></p>
 
                             <div className="modal-option-block">
                                 <h3>Цвет:</h3>

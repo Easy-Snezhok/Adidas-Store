@@ -56,7 +56,7 @@ function CartModal({isOpen, closeCart, changePage, cartItems, onRemoveItem, onCl
                                             </div>
                                         )}
                                         
-                                        <p>{item.price} ₽</p>
+                                        <p>{item.price} <span className="currency-rub">₽</span></p>
                                     </div>
                                     <button 
                                     onClick={() => onRemoveItem(index)}

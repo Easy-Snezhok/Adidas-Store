@@ -214,7 +214,7 @@ function Checkout({cartItems = [], onOrderComplete}) {
                                 Отмена
                             </button>
                             <button type="submit" className="custom-alert-btn-confirm">
-                                Оплатить {checkoutTotal} ₽
+                                Оплатить {checkoutTotal} <span className="currency-rub">₽</span>
                             </button>
                         </div>
                     </form>
@@ -227,7 +227,7 @@ function Checkout({cartItems = [], onOrderComplete}) {
                     <h2>Заказ успешно оплачен!</h2>
                      <p className="success-card-text">
                         <strong>{buyerName}</strong>, спасибо за покупку!<br />
-                        Сумма вашего заказа: <strong>{finalTotal} ₽</strong>.<br />
+                        Сумма вашего заказа: <strong>{finalTotal} <span className="currency-rub">₽</span></strong>.<br />
                         Наш менеджер уже связывается с вами для подтверждения по телефону: <strong>{buyerPhone}</strong>.
                     </p>
                     <button
