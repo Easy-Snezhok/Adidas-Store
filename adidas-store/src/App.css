@@ -2096,19 +2096,21 @@ h1 {
 
     body .filters-container {
         position: fixed;
-        top: 85px;
+        top: 90px;
         left: 0;
         width: 100%;
         background-color: #ffffff;
-        padding: 12px 20px;
+        padding: 20px;
         box-sizing: border-box;
-        z-index: 1000;
+        z-index: 2500;
         border-bottom: 1px solid #eeeeee;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        color: #000000;
+        -webkit-text-fill-color: #000000;
     }
 
     body .filter-toggle-icon {
@@ -2138,8 +2140,9 @@ h1 {
         box-sizing: border-box;
     }
 
-    .filter-btn.active {
+    body .filters-container .filter-btn.active {
         color: #0051BA;
+        -webkit-text-fill-color: #0051BA;
     }
 
     body .filters-container .mobile-show {
