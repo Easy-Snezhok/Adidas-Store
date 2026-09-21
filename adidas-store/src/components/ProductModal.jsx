@@ -136,7 +136,11 @@ function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], on
                                 className = {`modal-fav-btn ${isCurrentColorFavorite ? 'active' : ''}`} 
                                 id = "modalFavBtn"
                             >
-                                &#10084;
+                                {isCurrentColorFavorite ? (
+                                    <img src="icons/icon_heart_active.svg" alt="in favorites" className="my-heart-icon" />
+                                ) : (
+                                    <img src="icons/icon_heart.svg" alt="add to favorites" className="my-heart-icon" />
+                                )}
                             </button>
                         </div>
                     </div>

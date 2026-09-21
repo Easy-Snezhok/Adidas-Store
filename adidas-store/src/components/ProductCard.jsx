@@ -22,7 +22,11 @@ function ProductCard({ isNew, image, title, price, onCardClick, onBuyClick, onFa
                     onClick={onFavClick}
                     className={`fav-btn ${isFavorite ? 'active' : ''}`}
                 >
-                    &#10084;
+                    {isFavorite ? (
+                        <img src="icons/icon_heart_active.svg" alt="В избранном" className="my-heart-icon" />
+                    ) : (
+                        <img src="icons/icon_heart.svg" alt="Добавить в избранное" className="my-heart-icon" />
+                    )}
                 </button>
             </div>
         </div>

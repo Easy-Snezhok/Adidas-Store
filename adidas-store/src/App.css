@@ -211,6 +211,32 @@ h1 {
     position: relative;
 }
 
+.fav-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.my-heart-icon {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
 .product-card-image-wrapper {
     position: relative;
     width: 100%;
@@ -810,8 +836,6 @@ h1 {
 .modal-add-to-cart-btn:hover {
     background-color: #0051BA;
 }
-
-
 /**/
 
 /*СТИЛИ ДЛЯ CHECKOUT.HTML*/
@@ -2248,8 +2272,10 @@ h1 {
     }
 
     .thumbnail-card {
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+        box-sizing: border-box;
     }
 
     .product-modal-main-image-block {
@@ -2303,12 +2329,26 @@ h1 {
     }
 
     .fav-btn {
-        top: 5px;
+        top: 15px;
+        width: 22px;
+        height: 22px;
     }
 
     .modal-fav-btn {
-        right: 40px;
-        bottom: -80%;
+        display: flex;
+        top: 30px;
+        left: auto;
+        right: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .my-heart-icon {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        display: block;
+        flex-shrink: 0;
     }
 
     .profile-main-page {
