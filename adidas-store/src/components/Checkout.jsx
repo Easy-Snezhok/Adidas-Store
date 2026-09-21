@@ -223,7 +223,9 @@ function Checkout({cartItems = [], onOrderComplete}) {
 
             <div className={`success-overlay ${isSuccessOpen ? 'open' : ''}`} id="successOverlay">
                 <div className="success-card">
-                    <div className="success-icon">✔</div>
+                    <div className="success-icon">
+                        <img src="icons/Check.svg" alt="Успешно" className="success-check-img"/>
+                    </div>
                     <h2>Заказ успешно оплачен!</h2>
                      <p className="success-card-text">
                         <strong>{buyerName}</strong>, спасибо за покупку!<br />

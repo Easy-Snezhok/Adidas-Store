@@ -1138,13 +1138,19 @@ h1 {
     width: 70px;
     height: 70px;
     background-color: #0051BA;
-    color: #ffffff;
-    font-size: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     margin: 0 auto 20px auto;
+}
+
+.success-check-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
 }
 
 .success-card h2 {
@@ -2029,6 +2035,10 @@ h1 {
     header ul:not(.nav-menu-list) {
         display: none;
     }
+    
+    .hero-section h1 {
+        font-size: 65px;
+    }
 
     .hamburger-icon-btn {
         display: flex;
@@ -2072,7 +2082,7 @@ h1 {
         width: 100%;
         height: auto;
         background-color: #ffffff;
-        padding: 80px 20px 30px 20px;
+        padding: 110px 20px 30px 20px;
         box-sizing: border-box;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         transition: top 0.3s ease-in-out;
@@ -2102,7 +2112,7 @@ h1 {
         background-color: #ffffff;
         padding: 20px;
         box-sizing: border-box;
-        z-index: 2500;
+        z-index: 1000;
         border-bottom: 1px solid #eeeeee;
         display: flex;
         flex-wrap: wrap;
@@ -2271,14 +2281,16 @@ h1 {
 
     .product-modal-content {
         width: 95%;
-        padding: 40px 20px 20px 20px;
-        max-height: 95vh;
+        padding: 30px 20px 20px 20px;
+        max-height: 90vh;
         overflow-y: hidden;
     }
 
     .product-modal-body {
         flex-direction: column;
         gap: 10px;
+        display: flex;
+        padding-bottom: 25px;
     }
 
     .product-modal-gallery-wrapper {
@@ -2359,9 +2371,8 @@ h1 {
 
     .modal-fav-btn {
         display: flex;
-        top: 30px;
-        left: auto;
-        right: 8px;
+        top: -5px;
+        left: 10px;
         cursor: pointer;
         transition: all 0.2s ease;
     }
