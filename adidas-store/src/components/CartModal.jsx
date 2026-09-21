@@ -70,7 +70,7 @@ function CartModal({isOpen, closeCart, changePage, cartItems, onRemoveItem, onCl
                 <div className="cart-footer">
                     <div className="cart-total">
                         <span>Итого:</span>
-                        <span id="cartTotalSum">{totalSum} ₽</span>
+                        <span id="cartTotalSum">{totalSum} <span className="currency-rub">₽</span></span>
                     </div>
                     <button
                         onClick={() => {

@@ -157,7 +157,7 @@ function Checkout({cartItems = [], onOrderComplete}) {
                     <h3>Ваш заказ</h3>
                     <div className="checkout-total">
                         <span>Итого к оплате:</span>
-                        <span id="checkoutTotalSum">{checkoutTotal} ₽</span>
+                        <span id="checkoutTotalSum">{checkoutTotal} <span className="currency-rub">₽</span></span>
                     </div>
                 </div>
 
