@@ -1604,7 +1604,7 @@ h1 {
 
 .profile-status-highlight {
     color: #0051BA;
-    font-weight: bold;
+    font-weight: 550;
 }
 
 .profile-logout-btn {
@@ -1972,6 +1972,678 @@ h1 {
 .custom-alert-btn-confirm:hover {
     background-color: #B71C1C;
 }
+/**/
+
+/*СТИЛИ ДЛЯ ГАМБУРГЕР МЕНЮ*/
+.hamburger-icon-btn {
+    display: none;
+}
+/**/
+
+/*СТИЛИ ДЛЯ АДМИН ПАНЕЛИ*/
+.profile-settings-dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-toggle-btn {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-toggle-btn:hover {
+    transform: translateY(-2px);
+}
+
+.admin-svg-icon {
+    width: 24px;
+    height: 24px;
+    fill: #000000;
+    display: block;
+    transition: fill 0.2s ease;
+}
+
+.admin-toggle-btn:hover .admin-svg-icon,
+.admin-toggle-btn.active .admin-svg-icon {
+    fill: #ffffff;
+}
+
+.admin-workspace-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    background-color: #ffffff;
+    border: 1px solid #b6b5b5;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.admin-add-product-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.admin-section-label,
+.admin-builder-header span {
+    font-size: 13px;
+    font-weight: 900;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.admin-add-product-form input[type="text"],
+.admin-add-product-form input[type="number"],
+.admin-add-product-form select {
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1px solid #000000;
+    border-radius: 0px;
+    outline: none;
+    font-family: 'AdihausDIN', Arial, sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.admin-add-product-form input[type="text"]::placeholder,
+.admin-add-product-form input[type="number"]::placeholder {
+    color: #686868;
+}
+
+.admin-add-product-form input:focus,
+.admin-add-product-form select:focus {
+    background-color: #fafafa;
+}
+
+.admin-add-product-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 14px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.admin-mode-toggle-group {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 15px;
+}
+
+.admin-mode-toggle-group .admin-clickable-label {
+    cursor: pointer;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    display: flex;
+    gap: 15px;
+}
+
+.admin-clickable-label-checkbox {
+    display: flex;
+    gap: 15px;
+    font-weight: 700;
+}
+
+.admin-mode-toggle-group input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #0051BA;
+    border-radius: 50%;
+    outline: none;
+    margin: 0;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.admin-mode-toggle-group input[type="radio"]::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 0.15s transform ease-in-out;
+    background-color: #0051BA;
+}
+
+.admin-mode-toggle-group input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+.admin-checkbox-selector-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background-color: #ffffff;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+.admin-selectable-checkbox-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 12px 20px;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    user-select: none;
+    box-sizing: border-box;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #000000;
+}
+
+.admin-selectable-checkbox-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.admin-selectable-checkbox-item:hover {
+    border-color: #000000;
+    background-color: #f5f5f5;
+}
+
+.admin-selectable-checkbox-item:has(input:checked) {
+    background-color: #0051BA;
+    border-color: #0051BA;
+    color: #ffffff;
+}
+
+.sizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    width: 100%;
+    gap: 8px;
+}
+
+.size-box-item {
+    padding: 12px 0;
+    min-width: 0;
+    width: 100%;
+}
+
+.admin-input-group {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.admin-input-group .admin-clickable-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.admin-input-group input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #0051BA;
+    outline: none;
+    margin: 0;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: all 0.15s ease;
+}
+
+.admin-input-group input[type="checkbox"]::before {
+    content: "✓";
+    font-size: 12px;
+    font-weight: 900;
+    color: #ffffff;
+    transform: scale(0);
+    transition: 0.15s transform ease-in-out;
+}
+
+.admin-input-group input[type="checkbox"]:checked {
+    background-color: #0051BA;
+}
+
+.admin-input-group input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.admin-builder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 20px;
+}
+
+.admin-add-color-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: all 0.3s ease;
+}
+
+.admin-add-color-btn:hover {
+    background-color: #0051BA;
+    color: #ffffff;
+    border: 1px solid #0051BA;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.admin-color-row-card {
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 0px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: none;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.admin-color-row-card input[type="text"] {
+    border-color: #cccccc;
+    background-color: #ffffff;
+}
+
+.admin-images-inputs-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-images-inputs-row input {
+    padding: 11px 12px;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    border-radius: 0px;
+}
+
+.admin-submit-form-btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 0px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-submit-form-btn:hover {
+    background-color: #0051BA;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.admin-status-success {
+    background-color: #f4fbf7;
+    border: 1px solid #82e2b3;
+    color: #0f7643;
+    padding: 14px;
+    border-radius: 0px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.admin-status-error {
+    background-color: #fff5f5;
+    border: 1px solid #fca5a5;
+    color: #c53030;
+    padding: 14px;
+    border-radius: 0px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.admin-color-card-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -5px;
+    width: 100%;
+}
+
+.admin-delete-color-btn {
+    background-color: #ffffff;
+    border: 1px solid #b1190b;
+    color: #b1190b;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    padding: 5px 8px;
+    transition: all 0.3s ease;
+}
+
+.admin-delete-color-btn:hover {
+    color: #ffffff;
+    background-color: #b1190b;
+}
+
+.admin-form-actions-group {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+
+.admin-global-delete-product-btn {
+    background-color: #ffffff;
+    color: #c53030;
+    border: 1px solid #c53030;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 0px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+.admin-global-delete-product-btn:hover {
+    background-color: #c53030;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(197, 48, 48, 0.15);
+}
+/**/
+
+/*СТИЛИ ДЛЯ ЗАГРУЗКИ*/
+.adidas-loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffffff;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.adidas-premium-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #e5e5e5;
+    border-top: 3px solid #000000;
+    border-radius: 50%;
+    animation: adidasSpin 0.8s linear infinite;
+}
+
+.adidas-loader-text {
+    font-family: 'AdihausDIN', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #000000;
+}
+
+
+/**/
+
+/*СТИЛИ ДЛЯ CRM-СИСТЕМЫ*/
+.admin-crm-orders-section {
+    margin-top: 45px;
+    border-top: 2px solid #000000;
+    padding-top: 35px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.admin-crm-title {
+    font-family: 'AdihausDIN', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 800; 
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #000000;
+    margin: 0 0 25px 0; 
+}
+
+.admin-crm-empty-text {
+    font-size: 14px;
+    color: #888888;
+    margin: 10px 0;
+}
+
+.admin-crm-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-crm-order-card {
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02); 
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.admin-crm-order-card:hover {
+    border-color: #000000;
+}
+
+.admin-crm-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 15px;
+}
+
+.admin-crm-order-number {
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-crm-order-date {
+    font-size: 13px;
+    color: #888888;
+    font-weight: 400; 
+}
+
+.admin-crm-customer-info {
+    font-size: 14px;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #fafafa; 
+    padding: 20px;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
+}
+
+.admin-crm-customer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.admin-crm-customer-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.admin-crm-customer-row span {
+    color: #777777;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+}
+
+.admin-crm-customer-row strong {
+    font-weight: 500;
+    color: #000000;
+}
+
+.admin-crm-email-text {
+    color: #777777;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.admin-crm-order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #ffffff;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.admin-crm-item-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 16px;
+}
+
+.admin-crm-item-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.admin-crm-item-img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    padding: 4px;
+}
+
+.admin-crm-item-details {
+    flex: 1;
+}
+
+.admin-crm-item-details h4 {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.admin-crm-item-details p {
+    margin: 0;
+    font-size: 12px;
+    color: #777777;
+    font-weight: 400;
+}
+
+.admin-crm-item-price {
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.admin-crm-order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #eeeeee;
+}
+
+.admin-crm-status-badge {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+}
+
+.admin-crm-total {
+    font-size: 14px;
+    color: #666666;
+    font-weight: 400;
+}
+
+.admin-crm-total strong {
+    font-size: 18px;
+    font-weight: 900;
+    color: #000000;
+    margin-left: 5px;
+}
+/**/
+
+@keyframes adidasSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 @keyframes fadeInDropdown {
     from {
@@ -1983,13 +2655,6 @@ h1 {
         transform: translateY(0) scale(1);
     }
 }
-/**/
-
-/*СТИЛИ ДЛЯ ГАМБУРГЕР МЕНЮ*/
-.hamburger-icon-btn {
-    display: none;
-}
-/**/
 
 /*АДАПТИВ ДЛЯ МОБИЛОК*/
 @media (max-width: 768px) {
@@ -2281,7 +2946,7 @@ h1 {
 
     .product-modal-content {
         width: 95%;
-        padding: 30px 20px 20px 20px;
+        padding: 30px 20px 45px 20px;
         max-height: 90vh;
         overflow-y: hidden;
     }
@@ -2415,6 +3080,78 @@ h1 {
     body .profile-settings-panel .filter-btn.active,
     body .cart-panel .filter-btn.active {
         color: #ffffff;
+    }
+
+    .admin-workspace-panel {
+        padding: 20px 15px;
+        gap: 20px;
+        border-left: none;
+        border-right: none;
+    }
+
+    .admin-mode-toggle-group {
+        flex-direction: column;
+        gap: 12px;
+        padding-bottom: 20px;
+        width: 100%;
+    }
+
+    .admin-mode-toggle-group .admin-clickable-label {
+        width: 100%;
+        background-color: #fafafa;
+        border: 1px solid #e5e5e5;
+        padding: 14px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+        font-size: 12px;
+    }
+
+    .admin-builder-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .admin-add-color-btn {
+        width: 100%;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .admin-color-row-card {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .admin-images-inputs-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 100%;
+    }
+
+    .admin-images-inputs-row input {
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+
+    .sizes-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .admin-form-actions-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .admin-submit-form-btn,
+    .admin-global-delete-product-btn {
+        padding: 16px;
+        font-size: 15px;
+    }
+
+    .admin-crm-order-card {
+        padding: 20px;
     }
 
     @keyframes fadeInDropdown {

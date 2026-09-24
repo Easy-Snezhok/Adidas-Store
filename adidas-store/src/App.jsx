@@ -13,8 +13,7 @@ import About from './components/About';
 import './App.css';
 import { auth, db } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
-
+import { doc, setDoc, getDoc, collection, onSnapshot, addDoc } from 'firebase/firestore';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -24,6 +23,7 @@ function App() {
   const [globalNewOnly, setGlobalNewOnly] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [globalOrders, setGlobalOrders] = useState([]);
 
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
@@ -31,10 +31,15 @@ function App() {
 
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isFetchComplete, setIsFetchComplete] = useState(false);
+  const [isDataLoadedFromCloud, setIsDataLoadedFromCloud] = useState(false);
+
+  const [products, setProducts] = useState([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setIsFetchComplete(false);
+      setIsDataLoadedFromCloud(false);
 
       if (user) {
         setCurrentUser(user);
@@ -49,16 +54,18 @@ function App() {
             setCart(cloudData.cart || []);
             setFavorites(cloudData.favorites || []);
             setOrders(cloudData.orders || []);
-            console.log("Данные аккаунта успешно подгружены из Firestore!");
+            console.log("Данные аккаунта успешно подгружены из Firestore");
           } else {
-            console.log("Новый аккаунт: сохраняем текущую гостевую корзину для переноса в облако.");
+            console.log("Новый аккаунт: сохраняет текущую гостевую корзину для переноса в облако");
           }
+          setIsDataLoadedFromCloud(true);
         } catch (error) {
           console.error("Ошибка скачивания данных", error);
+          setIsDataLoadedFromCloud(true);
         }
       } else {
         setCurrentUser(null);
-        console.log("Режим гостя: загружаем локальный localStorage");
+        console.log("Режим гостя: загружает локальный localStorage");
 
         const savedCart = localStorage.getItem('adidas_cart');
         const savedFavs = localStorage.getItem('adidas_favorites');
@@ -67,6 +74,7 @@ function App() {
         setCart(savedCart ? JSON.parse(savedCart) : []);
         setFavorites(savedFavs ? JSON.parse(savedFavs) : []);
         setOrders(savedOrders ? JSON.parse(savedOrders) : []);
+        setIsDataLoadedFromCloud(true);
       }
       
       setIsInitialLoad(false);
@@ -76,8 +84,55 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-   useEffect(() => {
-    if (isInitialLoad || !isFetchComplete) return;
+  useEffect(() => {
+    const unsubscribeFromGlobalOrders = onSnapshot(collection(db, "global_orders"), (querySnapshot) => {
+      const ordersArray = [];
+      
+      querySnapshot.forEach((doc) => {
+        ordersArray.push({
+          ...doc.data(),
+          cloudOrderId: doc.id
+        });
+      });
+
+      ordersArray.sort((a, b) => b.id - a.id);
+
+      setGlobalOrders(ordersArray);
+      console.log("CRM-лента заказов Adidas Store успешно синхронизирована");
+    }, (error) => {
+      console.error("Ошибка при получении CRM-ленты заказов:", error);
+    });
+
+    return () => unsubscribeFromGlobalOrders();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribeFromProducts = onSnapshot(collection(db, "products"), (querySnapshot) => {
+      const firebaseProductsArray = [];
+      
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        firebaseProductsArray.push({
+          ...data,
+          id: doc.id, 
+          orderNumber: data.id ? Number(data.id) : 999 
+        });
+      });
+      firebaseProductsArray.sort((a, b) => a.orderNumber - b.orderNumber);
+
+      setProducts(firebaseProductsArray);
+      setIsLoadingProducts(false);
+      console.log("Витрина Adidas Store синхронизирована с Firestore");
+    }, (error) => {
+      console.error("Критическая ошибка при обновлении каталога:", error);
+      setIsLoadingProducts(false);
+    });
+
+    return () => unsubscribeFromProducts();
+  }, []);
+
+  useEffect(() => {
+    if (isInitialLoad || !isFetchComplete || !isDataLoadedFromCloud) return;
 
     const saveData = async () => {
       if (currentUser) {
@@ -88,7 +143,7 @@ function App() {
             favorites: favorites,
             orders: orders
           }, { merge: true });
-          console.log("Изменения успешно запечатаны в облако Firestore!");
+          console.log("Изменения успешно добавлены в облако Firestore");
         } catch (error) {
           console.error("Ошибка сохранения в облако:", error);
         }
@@ -100,13 +155,13 @@ function App() {
     };
 
     saveData();
-  }, [cart, favorites, orders, currentUser, isInitialLoad, isFetchComplete]);
+  }, [cart, favorites, orders, currentUser, isInitialLoad, isFetchComplete, isDataLoadedFromCloud]);
 
   useEffect(() => {
     window.scroll(0, 0);
   }, [currentPage]);
 
-   const toggleFavorite = (product) => {
+  const toggleFavorite = (product) => {
     const existingItem = favorites.find(
       (item) => item.id === product.id && item.selectedColor === product.selectedColor
     );
@@ -123,8 +178,8 @@ function App() {
   };
 
   const removeModelFromFavorites = (productId) => {
-      setFavorites(favorites.filter((item) => item.id !== productId));
-    };
+    setFavorites(favorites.filter((item) => item.id !== productId));
+  };
 
   const addToCart = (product) => {
     setCart([...cart, product]);
@@ -138,19 +193,66 @@ function App() {
     setCart([]);
   };
 
-  const completeOrder = () => {
-    if (cart.length > 0) {
-      const newOrder = {
-        id: Math.floor(Math.random() * 9000) + 10000,
-        date: new Date().toLocaleDateString('ru-RU'),
-        items: [...cart],
-        total: cart.reduce((sum, item) => sum + item.price, 0)
-      };
+  const completeOrder = async (customerName, customerPhone, customerAddress) => {
+    if (cart.length === 0) return;
 
-      setOrders([newOrder, ...orders]);
+    const orderId = Math.floor(Math.random() * 9000) + 10000;
+    
+    const cleanItems = cart.map(item => {
+      let finalImg = '';
+      if (item.images && item.selectedColor && item.images[item.selectedColor]) {
+        finalImg = Array.isArray(item.images[item.selectedColor]) 
+          ? item.images[item.selectedColor][0] 
+          : item.images[item.selectedColor];
+      } else if (item.images) {
+        const allUrls = Object.values(item.images);
+        finalImg = Array.isArray(allUrls[0]) ? allUrls[0][0] : allUrls[0];
+      }
+
+      return {
+        id: item.id || 'unknown',
+        title: item.title || 'Товар Adidas',
+        price: Number(item.price) || 0,
+        selectedColor: item.selectedColor || 'white',
+        selectedSize: item.selectedSize || 'Не указан',
+        image: finalImg || ''
+      };
+    });
+
+    const orderData = {
+      id: orderId,
+      date: new Date().toLocaleDateString('ru-RU'),
+      items: cleanItems,
+      total: cart.reduce((sum, item) => sum + (Number(item.price) || 0), 0),
+      customerName: customerName || 'Анонимный покупатель',
+      customerPhone: customerPhone || 'Не указан',
+      customerAddress: customerAddress || 'Самовывоз из магазина',
+      customerEmail: currentUser ? currentUser.email : 'Гость',
+      status: 'pending'
+    };
+
+    try {
+      setOrders([orderData, ...orders]);
+
+      await addDoc(collection(db, "global_orders"), orderData);
+      console.log(`Заказ №${orderId} успешно отправлен в глобальную CRM`);
+
+      setCart([]);
+
+    } catch (error) {
+      console.error("Критическая ошибка при отправке заказа в CRM:", error);
+      setCart([]);
     }
-    setCart([]);
   };
+
+  if (isLoadingProducts) {
+    return (
+      <div className="adidas-loader-container">
+        <div className="adidas-premium-spinner"></div>
+        <span className="adidas-loader-text">Загрузка</span>
+      </div>
+    );
+  }
 
   return (
     <div className = "app-container">
@@ -179,6 +281,7 @@ function App() {
               changePage = {setCurrentPage}
               onAddToCart = {addToCart}
               onOpenProduct = {setSelectedProduct} 
+              products={products}
               favorites = {favorites} 
               onToggleFavorite = {toggleFavorite}
               onRemoveModel = {removeModelFromFavorites}
@@ -188,6 +291,8 @@ function App() {
             <Catalog 
               onAddToCart = {addToCart} 
               onOpenProduct = {setSelectedProduct} 
+              products={products}
+              isLoading={isLoadingProducts}
               favorites = {favorites}
               onToggleFavorite = {toggleFavorite}
               onRemoveModel = {removeModelFromFavorites}
@@ -214,6 +319,8 @@ function App() {
             <Profile
               user = {currentUser}
               orders = {orders}
+              products = {products}
+              globalOrders = {globalOrders}
               onLogout = {() => {
                 setCurrentUser(null);
                 setCart([]);

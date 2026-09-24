@@ -1,19 +1,18 @@
 import {useState} from 'react';
 import ProductCard from './ProductCard';
-import {products} from '../productsData';
 
-function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, setSelectedGender, onlyNew, setOnlyNew, onRemoveModel}) {
+function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, setSelectedGender, onlyNew, setOnlyNew, onRemoveModel, products: dbProducts}) {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
-    const filteredProducts = products.filter((product) => {
+    const filteredProducts = (dbProducts || []).filter((product) => {
         const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesCategory = selectedCategory === '' || product.category === selectedCategory;
 
-        const matchesGender = selectedGender === '' || product.gender.includes(selectedGender);
+        const matchesGender = selectedGender === '' || 
+            (Array.isArray(product.gender) ? product.gender.includes(selectedGender) : product.gender === selectedGender);
 
         const matchesNew = !onlyNew || product.isNew === true;
 
@@ -92,13 +91,20 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
                     filteredProducts.map((product) => {
                         const defaultColor = product.colors && product.colors[0] ? product.colors[0].name : 'white';
                          const isFav = favorites.some((favItem) => favItem.id === product.id);
+                         const targetColorImages = product.images && product.images[defaultColor]
+                            ?product.images[defaultColor]
+                            :Object.values(product.images)[0];
+
+                        const currentCardImage = Array.isArray(targetColorImages)
+                            ?targetColorImages[0]
+                            :targetColorImages;
 
                         return (
                             <ProductCard
                                 key={product.id}
                                 title={product.title}
                                 price={product.price}
-                                image={Object.values(product.images)[0][0] || Object.values(product.images)[0]}
+                                image={currentCardImage}
                                 onBuyClick={() => onOpenProduct(product)}
                                 onCardClick={() => onOpenProduct(product)}
                                 isFavorite={isFav}

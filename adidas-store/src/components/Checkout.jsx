@@ -100,7 +100,7 @@ function Checkout({cartItems = [], onOrderComplete}) {
         setBankError('Проверка карты банком...');
         setTimeout(() => {
             setIsBankOpen(false);
-            onOrderComplete();
+            onOrderComplete(buyerName, buyerPhone, 'Самовывоз / Адрес из профиля');
             setIsSuccessOpen(true);
         }, 800);
     };
