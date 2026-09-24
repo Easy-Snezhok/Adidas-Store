@@ -3,7 +3,7 @@ import { auth, db } from '../firebase';
 import { signOut, deleteUser } from 'firebase/auth';
 import { doc, getDoc, collection, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
-function Profile({ user, onLogout, orders = [], products = [], globalOrders = [] }) {
+function Profile({ user, onLogout, orders = [], products = [], globalOrders = [], onClearOrders }) {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [settingsError, setSettingsError] = useState('');
@@ -13,7 +13,12 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState('');
-
+    const [customConfirm, setCustomConfirm] = useState({
+        isOpen: false,
+        message: '',
+        onConfirm: null
+    });
+    
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('classic');
@@ -151,37 +156,39 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
         }));
     };
 
-     const handleDeleteProduct = async () => {
+    const handleDeleteProduct = () => {
         if (!selectedProductId) return;
 
-        const isConfirmed = window.confirm(`Вы уверены, что хотите НАВСЕГДА удалить модель "${title}" с витрины Adidas Store?`);
-        if (!isConfirmed) return;
+        setCustomConfirm({
+            isOpen: true,
+            message: `Вы уверены, что хотите НАВСЕГДА удалить модель "${title}" с витрины Adidas Store?`,
+            onConfirm: async () => {
+                setAdminSuccessMessage('');
+                setAdminErrorMessage('');
 
-        setAdminSuccessMessage('');
-        setAdminErrorMessage('');
+                try {
+                    const productDocRef = doc(db, "products", selectedProductId);
+                    await deleteDoc(productDocRef);
 
-        try {
-            const productDocRef = doc(db, "products", selectedProductId);
-            
-            await deleteDoc(productDocRef);
-
-            setAdminSuccessMessage(`Кроссовки "${title}" успешно удалены из базы данных и с витрины`);
-            
-            setTitle('');
-            setPrice('');
-            setCategory('classic');
-            setGender([]);
-            setSizes([]);
-            setIsNew(false);
-            setIsEditMode(false);
-            setSelectedProductId('');
-            setColorsInput([
-                { id: 'init_white', name: 'white', value: '#ffffff', images: ['', '', '', ''] }
-            ]);
-
-        } catch (error) {
-            setAdminErrorMessage(`Не удалось удалить товар с витрины: ${error.message}`);
-        }
+                    setAdminSuccessMessage(`Кроссовки "${title}" успешно удалены из базы данных и скрыты с витрины!`);
+                    
+                    
+                    setTitle('');
+                    setPrice('');
+                    setCategory('classic');
+                    setGender([]);
+                    setSizes([]);
+                    setIsNew(false);
+                    setIsEditMode(false);
+                    setSelectedProductId('');
+                    setColorsInput([
+                        { id: 'init_white', name: 'white', value: '#ffffff', images: ['', '', '', ''] }
+                    ]);
+                } catch (error) {
+                    setAdminErrorMessage(`Не удалось удалить товар с витрины: ${error.message}`);
+                }
+            }
+        });
     };
 
     const handleUpdateOrderStatus = async (cloudOrderId) => {
@@ -650,7 +657,26 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                     </section>
 
                     <section className="profile-history-section">
-                        <h2>История заказов</h2>
+                        <div className="profile-orders-header-row">
+                            <h2>История заказов</h2>
+                                {orders.length > 0 && (
+                                <button 
+                                    type="button" 
+                                    className="profile-clear-history-btn"
+                                    onClick={() => {
+                                        setCustomConfirm({
+                                            isOpen: true,
+                                            message: "Вы уверены, что хотите полностью очистить историю ваших заказов? Это действие нельзя отменить.",
+                                            onConfirm: () => {
+                                                onClearOrders();
+                                            }
+                                        });
+                                    }}
+                                >
+                                    Очистить историю
+                                </button>
+                                )}
+                        </div>
                         
                         {orders.length === 0 ? (
                             <div className="profile-orders-placeholder">
@@ -723,6 +749,39 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                     </div>
                 </div>
             </div>
+
+            <div className={`custom-confirm-overlay ${customConfirm.isOpen ? 'open' : ''}`}>
+                <div className="custom-confirm-card">
+                    <div className="custom-confirm-icon">✕</div>
+                    <h3 className="custom-confirm-title">Подтверждение действия</h3>
+                    <p className="custom-confirm-message">{customConfirm.message}</p>
+
+                    <div className="custom-confirm-actions">
+                        <button
+                            type="button"
+                            className="custom-confirm-btn-agree"
+                            onClick={() => {
+                                if (customConfirm.onConfirm) customConfirm.onConfirm();
+                                setCustomConfirm({ isOpen: false, message: '', onConfirm: null });
+                            }}
+                        >
+                            Да, выполнить
+                        </button>
+                        <button
+                            type="button"
+                            className="custom-confirm-btn-cancel"
+                            onClick={() => setCustomConfirm({ isOpen: false, message: '', onConfirm: null })}
+                        >
+                            Отмена
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {customConfirm.isOpen === false && (
+                <div className="profile-orders-modal-holder">
+                </div>
+            )}
         </main>
     );
 }

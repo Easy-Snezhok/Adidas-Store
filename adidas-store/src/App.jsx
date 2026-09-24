@@ -245,6 +245,25 @@ function App() {
     }
   };
 
+  const clearUserOrdersHistory = async () => {
+    const isConfirmed = window.confirm("Вы уверены, что хотите очистить полностью историю ваших заказов? Это действие нельзя отменить.");
+    if (!isConfirmed) return;
+
+    try {
+      setOrders([]);
+
+      localStorage.removeItem('adidas_orders');
+
+      if (currentUser) {
+        const userDocRef = doc(db, "user_data", currentUser.uid);
+        await setDoc(userDocRef, {orders: []}, {merge: true});
+      }
+      console.log("Личная история заказов пользователя успешно очищена");
+    } catch (error) {
+      console.error("Ошибка при очистке истории заказов:", error);
+    }
+  };
+
   if (isLoadingProducts) {
     return (
       <div className="adidas-loader-container">
@@ -321,6 +340,7 @@ function App() {
               orders = {orders}
               products = {products}
               globalOrders = {globalOrders}
+              onClearOrders = {clearUserOrdersHistory}
               onLogout = {() => {
                 setCurrentUser(null);
                 setCart([]);
