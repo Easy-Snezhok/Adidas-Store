@@ -2121,6 +2121,8 @@ h1 {
     place-content: center;
     cursor: pointer;
     transition: all 0.15s ease;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
 }
 
 .admin-mode-toggle-group input[type="radio"]::before {
@@ -2241,11 +2243,14 @@ h1 {
 
 .admin-builder-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
     margin-top: 15px;
     border-top: 1px solid #eeeeee;
     padding-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-add-color-btn {
@@ -2288,9 +2293,9 @@ h1 {
 }
 
 .admin-images-inputs-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+   display: flex;
+    flex-direction: column;
+    gap: 12px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -2371,6 +2376,7 @@ h1 {
 
 .admin-form-actions-group {
     display: flex;
+    flex-direction: column;
     gap: 15px;
     width: 100%;
     margin-top: 15px;
@@ -2613,13 +2619,14 @@ h1 {
 }
 
 .admin-crm-status-badge {
-    background-color: #000000;
-    color: #ffffff;
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 8px 16px;
+    box-sizing: border-box;
+    display: inline-block;
+    transition: all 0.2s ease;
 }
 
 .admin-crm-total {
@@ -2633,6 +2640,116 @@ h1 {
     font-weight: 900;
     color: #000000;
     margin-left: 5px;
+}
+
+.admin-crm-status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-crm-status-badge .pending {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.admin-crm-status-badge .completed {
+    background-color: #e6f4ea;
+    color: #137333;
+    border: 1px solid #137333;
+    padding: 7px 15px;
+}
+
+.admin-crm-complete-order-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+.admin-crm-complete-order-btn:hover {
+    background-color: #0051BA;
+    border: 1px solid #0051BA;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr; /* Левая колонка фиксированная, правая забирает весь остаток */
+    gap: 30px; /* Свободный простор между колонками */
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+/* 📊 СТИЛИ ЛЕВОЙ КОЛОНКИ: Панель аналитики */
+.admin-left-sidebar {
+    background-color: #ffffff;
+    border: 1px solid #b6b5b5;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky;
+    top: 100px;
+    box-sizing: border-box;
+}
+
+/* Общий контейнер плашек аналитики */
+.admin-analytics-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Индивидуальная карточка показателя */
+.admin-analytics-card {
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+/* Выделяем плашку чистой прибыли мягким зеленым тоном */
+.admin-analytics-card.completed-profit {
+    background-color: #f4fbf7;
+    border-color: #82e2b3;
+}
+
+.admin-analytics-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #777777;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.admin-analytics-value {
+    font-family: 'AdihausDIN', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #000000;
+}
+
+/* 🛠️ СТИЛИ ПРАВОЙ КОЛОНКИ: Форма контента и CRM */
+.admin-main-content-flow {
+    width: 100%;
+    box-sizing: border-box;
 }
 /**/
 
@@ -2946,7 +3063,7 @@ h1 {
 
     .product-modal-content {
         width: 95%;
-        padding: 30px 20px 45px 20px;
+        padding: 30px 20px 40px 20px;
         max-height: 90vh;
         overflow-y: hidden;
     }
@@ -3152,6 +3269,17 @@ h1 {
 
     .admin-crm-order-card {
         padding: 20px;
+    }
+
+     .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .admin-left-sidebar {
+        position: relative;
+        top: 0;
+        border-bottom: 2px solid #000000;
     }
 
     @keyframes fadeInDropdown {

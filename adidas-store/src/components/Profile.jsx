@@ -28,6 +28,14 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
     const [adminSuccessMessage, setAdminSuccessMessage] = useState('');
     const [adminErrorMessage, setAdminErrorMessage] = useState('');
 
+     const totalSalesSum = Array.isArray(globalOrders) 
+        ? globalOrders.reduce((sum, order) => sum + (Number(order.total) || 0), 0)
+        : 0;
+
+    const completedSalesSum = Array.isArray(globalOrders)
+        ? globalOrders.filter(order => order.status === 'completed').reduce((sum, order) => sum + (Number(order.total) || 0), 0)
+        : 0;
+
     useEffect(() => {
         const checkAdminRole = async () => {
             if (!user) return;
@@ -175,6 +183,23 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
             setAdminErrorMessage(`Не удалось удалить товар с витрины: ${error.message}`);
         }
     };
+
+    const handleUpdateOrderStatus = async (cloudOrderId) => {
+        if (!cloudOrderId) return;
+
+        try {
+            const orderDocRef = doc(db, "global_orders", cloudOrderId);
+
+            await updateDoc(orderDocRef, {
+                status: 'completed'
+            });
+
+            console.log(`Статус заказа ${cloudOrderId} успешно обновлен на выполненый`);
+        } catch (error) {
+            console.error("Ошибка при обновлении статуса заказа в CRM:", error);
+            window.alert('Не удалось обновить статус заказа:' + error.message);
+        }
+    }
 
     const handleAddProductSubmit = async (e) => {
         e.preventDefault();
@@ -332,15 +357,31 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                 </section>
 
                 {isAdminView ? (
-                    <section className="profile-card-section admin-workspace-panel">
-                        <div className="profile-user-status">
-                            <h2>Панель управления</h2>
-                            <p className="profile-status-label">
-                                Статус сессии: <span className="profile-status-highlight">Разработчик (Root Admin)</span>
-                            </p>
-                        </div>
+                    
+                    <div className="admin-dashboard-grid">
+                        <aside className="admin-left-sidebar">
+                            <div className="admin-user-status">
+                                <h2>Панель управления</h2>
+                                <p className="profile-status-label">
+                                    Сессия:  <span className="profile-status-highlight">Root Admin</span>
+                                </p>
+                            </div>
 
-                        {adminSuccessMessage && <p className="admin-status-success">{adminSuccessMessage}</p>}
+                            <div className="admin-analytics-dashboard">
+                                <div className="admin-analytics-card">
+                                    <span className="admin-analytics-label">Общий оборот</span>
+                                    <strong className="admin-analytics-value">{totalSalesSum} ₽</strong>
+                                </div>
+                                <div className="admin-analytics-card completed-profit">
+                                    <span className="admin-analytics-label">Чистая выручка</span>
+                                    <strong className="admin-analytics-value">{completedSalesSum} ₽</strong>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <div className="admin-main-content-flow">
+                            <section className="profile-card-section admin-workspace-panel">
+                                {adminSuccessMessage && <p className="admin-status-success">{adminSuccessMessage}</p>}
                         {adminErrorMessage && <p className="admin-status-error">{adminErrorMessage}</p>}
                          <form onSubmit={handleAddProductSubmit} className="admin-add-product-form">
                             <div className="admin-mode-toggle-group">
@@ -568,16 +609,32 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                                                 </div>
 
                                                 <div className="admin-crm-order-footer">
-                                                    <span className="admin-crm-status-badge">В обработке</span>
-                                                    <span className="admin-crm-total">Итого: <strong>{gOrder.total}</strong> <span className="currency-rub">₽</span></span>
+                                                    <div className="admin-crm-status-wrapper">
+                                                        <span className={`admin-crm-status-badge ${gOrder.status === 'completed' ? 'completed' : 'pending'}`}>
+                                                            {gOrder.status === 'completed' ? 'Выполнен' : 'В обработке'}
+                                                        </span>
+
+                                                        {gOrder.status !== 'completed' && (
+                                                            <button
+                                                                type="button"
+                                                                className="admin-crm-complete-order-btn"
+                                                                onClick={() => handleUpdateOrderStatus(gOrder.cloudOrderId)}
+                                                            >
+                                                                Завершить
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                    <span className="admin-crm-total">Итого: <strong>{gOrder.total} <span className="currency-rub">₽</span></strong></span>
                                                 </div>
                                             </div>
                                         );
                                     })}
                                 </div>
                             )}
+                            </div>
+                            </section>
                         </div>
-                    </section>    
+                    </div>
                 ) : (
                     <>
                     <section className="profile-card-section">
@@ -635,7 +692,7 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                                                 Статус: <span className="profile-order-status-highlight">В обработке менеджером</span>
                                             </span>
                                             <span className="profile-order-total-sum">
-                                                Итого: <span className="profile-order-total-highlight">{order.total} ₽</span>
+                                                Итого: <span className="profile-order-total-highlight">{order.total} <span className="currency-rub">₽</span></span>
                                             </span>
                                         </div>
                                     </div>
