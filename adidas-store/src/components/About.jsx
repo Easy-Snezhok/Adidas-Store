@@ -27,7 +27,7 @@ function About() {
                     <div className="about-info-block">
                         <h3>Контакты</h3>
                         <p>Телефон поддержки: +7 (800) 555 - 35 - 35</p>
-                        <p>Email: support@adidas-store.ru</p>
+                        <p>Email: <a href="mailto:adidasstoresupport@gmail.com" className="profile-email-link">adidasstoresupport@gmail.com</a></p>
                     </div>
                 </section>
 

@@ -1455,6 +1455,23 @@ h1 {
     position: relative;
     border-radius: 8px;
 }
+
+.profile-email-link {
+     color: #0051BA;
+    text-decoration: none;
+    padding-bottom: 2px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.profile-email-link:hover {
+    color: #0051BA; /* Твой фирменный синий цвет Adidas при наведении */
+    border-color: #0051BA;
+    transform: translateY(-1px); /* Легкий аккуратный сдвиг вверх */
+}
 /**/
 
 /*СТИЛИ ДЛЯ FOOTER*/
