@@ -1468,9 +1468,9 @@ h1 {
 }
 
 .profile-email-link:hover {
-    color: #0051BA; /* Твой фирменный синий цвет Adidas при наведении */
+    color: #0051BA;
     border-color: #0051BA;
-    transform: translateY(-1px); /* Легкий аккуратный сдвиг вверх */
+    transform: translateY(-1px);
 }
 /**/
 
