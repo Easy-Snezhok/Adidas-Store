@@ -235,6 +235,19 @@ h1 {
     margin: 0;
 }
 
+.fav-btn, 
+.fav-btn * {
+    line-height: 0 !important;
+    font-size: 0 !important;
+}
+
+.fav-btn svg, 
+.fav-btn img {
+    width: 22px !important;
+    height: 22px !important;
+    display: block !important;
+}
+
 .my-heart-icon {
     width: 25px;
     height: 25px;
@@ -318,6 +331,9 @@ h1 {
 }
 
 .filters-container {
+     display: flex;
+    gap: 10px;
+    align-items: center;
     position: -webkit-sticky;
     position: sticky;
     top: 90px;
@@ -326,7 +342,6 @@ h1 {
     background-color: #ffffff;
     padding: 40px 60px 10px 60px;
     display: flex;
-    gap: 15px;
 }
 
 .filter-btn {
@@ -348,6 +363,16 @@ h1 {
 .filter-btn.active {
     background-color: #000000;
     color: #ffffff;
+}
+
+.filters-drawer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.drawer-mobile-header {
+    display: none;
 }
 
 .header-icon-wrapper {
@@ -3175,6 +3200,95 @@ h1 {
         display: block;
         order: 1;
         margin-right: 5px;
+    }
+
+    .filters-drawer {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 290px;
+        height: 45vh;
+        background-color: #ffffff;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+        z-index: 2500;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 30px 10px;
+        border-bottom-right-radius: 10px;
+        gap: 12px;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .filters-drawer.drawer-open {
+        transform: translateX(0);
+    }
+
+     .drawer-mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eeeeee;
+        padding-bottom: 15px;
+    }
+
+     .filters-drawer .filter-btn {
+        display: block !important;
+        width: 100% !important;
+        text-align: left;
+        margin: 0;
+        background-color: #f9f9f9;
+        border: 1px solid #e2e2e2;
+        border-radius: 6px;
+        padding: 12px 20px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .drawer-mobile-header span {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    .drawer-close-btn {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #000000;
+    }
+
+    body .filters-container .filters-drawer .filter-btn {
+        width: 100% !important;
+        text-align: left;
+        margin: 0;
+    }
+
+    .drawer-overlay {
+        display: none;
+    }
+
+     .drawer-overlay {
+        display: block !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2400; 
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+     .drawer-overlay.overlay-active {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     body .search-input {

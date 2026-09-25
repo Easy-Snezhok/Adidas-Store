@@ -1,10 +1,25 @@
-import {useState} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import ProductCard from './ProductCard';
 
 function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, setSelectedGender, onlyNew, setOnlyNew, onRemoveModel, products: dbProducts}) {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+
+    const filtersRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (isFiltersOpen && filtersRef.current && !filtersRef.current.contains(event.target)) {
+                setIsFiltersOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isFiltersOpen]);
 
     const filteredProducts = (dbProducts || []).filter((product) => {
         const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -32,9 +47,22 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
             <div className="filters-container">
                 <div
                     className="filter-toggle-icon"
-                    onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsFiltersOpen(!isFiltersOpen);
+                    }}
                 >
                     <img src="icons/filter_toggle_icon.svg" className="icon-sliders" alt="filters" />
+                </div>
+                
+                <div 
+                    className={`filters-drawer ${isFiltersOpen ? 'drawer-open' : ''}`}
+                    ref={filtersRef}
+                >
+                
+                <div className="drawer-mobile-header">
+                    <span>Фильтры</span>
+                    <button className="drawer-close-btn" onClick={() => setIsFiltersOpen(false)}>✕</button>
                 </div>
 
                 <button 
@@ -72,6 +100,7 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
                     className={`filter-btn ${isFiltersOpen ? 'mobile-show' : ''} ${selectedGender === 'kids' ? 'active' : ''}`}>
                         Детям
                 </button>
+                </div>
 
                 <input
                     type="text"
@@ -80,6 +109,11 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
                     className="search-input"
                     placeholder="Поиск..."
                 />
+
+                <div 
+                    className={`drawer-overlay ${isFiltersOpen ? 'overlay-active' : ''}`}
+                    onClick={() => setIsFiltersOpen(false)}
+                ></div>
             </div>
 
             <div className="products-container">
