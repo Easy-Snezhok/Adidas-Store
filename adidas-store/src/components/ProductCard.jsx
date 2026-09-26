@@ -1,10 +1,22 @@
-function ProductCard({ isNew, image, title, price, onCardClick, onBuyClick, onFavClick, isFavorite }) {
+function ProductCard({ isNew, salePercent = 0, image, title, price, onCardClick, onBuyClick, onFavClick, isFavorite }) {
+
+    const hasSale = salePercent > 0;
+    const discountedPrice = hasSale
+        ? Math.round(price * (1 - salePercent / 100))
+        : price;
+
     return (
         <div className="product-card">
             <div className="product-card-image-wrapper">
                 {isNew && (
                     <div className="new-badge-label">
                         НОВОЕ
+                    </div>
+                )}
+
+                {hasSale && (
+                    <div className="sale-badge-label">
+                        -{salePercent}%
                     </div>
                 )}
                 <img
@@ -15,7 +27,14 @@ function ProductCard({ isNew, image, title, price, onCardClick, onBuyClick, onFa
             </div>
             
             <h3 onClick={onCardClick}>{title}</h3>
-            <p>{price} <span className="currency-rub">₽</span></p>
+            {hasSale ? (
+                <p className="product-card-price-block">
+                    <span className="new-discounted-price">{discountedPrice} <span className="currency-rub">₽</span></span>
+                    <span className="old-struck-price">{price} <span className="currency-rub">₽</span></span>
+                </p>
+            ) : (
+                <p>{price} <span className="currency-rub">₽</span></p>
+            )}
             <button onClick={onBuyClick} className="buy-btn">Купить</button>
             <div className="product-card-actions">
                 <button 

@@ -446,6 +446,42 @@ h1 {
     align-items: center;
 }
 
+.sale-badge-label {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #E22120;
+    color: #ffffff;
+    font-family: 'AdihausDIN', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 5px 10px;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.product-card-price-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px 0;
+}
+
+.new-discounted-price {
+    font-weight: 800;
+    color: #E22120;
+    font-size: 16px;
+}
+
+.old-struck-price {
+    font-size: 13px;
+    color: #888888;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+/**/
+
 /* СТИЛИ МОДАЛКИ ДЛЯ КОРЗИНЫ */
 .cart-modal {
     position: fixed;
@@ -2707,6 +2743,11 @@ h1 {
     color: #ffffff;
     box-shadow: 0 6px 20px rgba(197, 48, 48, 0.15);
 }
+
+.admin-input-label {
+    font-weight: 550;
+    
+}
 /**/
 
 /*СТИЛИ ДЛЯ ЗАГРУЗКИ*/
@@ -3217,6 +3258,35 @@ h1 {
         display: block;
         order: 1;
         margin-right: 5px;
+    }
+
+    body .filters-container .filter-btn:nth-of-type(1) { top: 165px; }
+    body .filters-container .filter-btn:nth-of-type(2) { top: 220px; }
+    body .filters-container .filter-btn:nth-of-type(3) { top: 275px; }
+    body .filters-container .filter-btn:nth-of-type(4) { top: 385px; }
+    body .filters-container .filter-btn:nth-of-type(5) { top: 440px; }
+    body .filters-container .filter-btn:nth-of-type(6) { top: 495px; }
+    body .filters-container .filter-btn:nth-of-type(7) { top: 330px; }
+
+     body .filters-container .filter-btn:nth-of-type(1)::before {
+        height: 435px;
+    }
+
+    body .product-card-image-wrapper .sale-badge-label {
+        position: relative;
+        top: 15px;
+        right: unset;
+        display: inline-block;
+        margin: 10px 0 5px 0;
+        font-size: 11px;
+        padding: 4px 8px;
+        align-self: flex-start;
+    }
+
+    body .main .products-container .product-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .filters-drawer {

@@ -182,7 +182,16 @@ function App() {
   };
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    const hasSale = product.salePercent > 0;
+    const finalPrice = hasSale
+      ? Math.round(product.price * (1 - product.salePercent / 100))
+      : product.price;
+
+    const productWithDiscount = {
+      ...product,
+      price: finalPrice
+    };
+    setCart([...cart, productWithDiscount]);
   };
 
   const removeFromCart = (indexToRemove) => {

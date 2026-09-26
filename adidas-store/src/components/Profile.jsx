@@ -25,6 +25,7 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
     const [gender, setGender] = useState([]);
     const [sizes, setSizes] = useState([]);
     const [isNew, setIsNew] = useState(false);
+    const [salePercent, setSalePercent] = useState('');
 
     const [colorsInput, setColorsInput] = useState([
         { id: 'init_white', name: 'white', value: '#ffffff', images: ['', '', '', ''] }
@@ -71,6 +72,7 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
             setGender([]);
             setSizes([]);
             setIsNew(false);
+            setSalePercent('');
             setColorsInput([{ id: 'init_white', name: 'white', value: '#ffffff', images: ['', '', '', ''] }]);
             return;
         }
@@ -84,6 +86,7 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
             setGender(currentProduct.gender || []);
             setSizes(currentProduct.sizes || []);
             setIsNew(currentProduct.isNew || false);
+            setSalePercent(currentProduct.salePercent !== undefined ? currentProduct.salePercent : '');
 
 
             if (currentProduct.colors && currentProduct.colors.length > 0) {
@@ -238,7 +241,8 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                 sizes: sizes,
                 images: cleanImages,
                 colors: cleanColorsForFirestore,
-                isNew: isNew
+                isNew: isNew,
+                salePercent: salePercent !== '' ? Number(salePercent) : 0
             };
 
             if (isEditMode && selectedProductId) {
@@ -260,6 +264,7 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
             setGender([]);
             setSizes([]);
             setIsNew(false);
+            setSalePercent('');
             setIsEditMode(false);
             setSelectedProductId('');
             setColorsInput([
@@ -470,6 +475,23 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                                     />
                                     Отметить маркой НОВОЕ
                                 </label>
+                            </div>
+
+                            <div className="admin-input-group">
+                                <label className="admin-input-label">Размер скидки в % Отставьте пустым, если скидки нет</label>
+                                <input 
+                                    type="number"
+                                    value={salePercent}
+                                    onChange={(e) => {
+                                        const val = e.target.value;
+                                        if (val === '' || (Number(val) >= 0 && Number(val) <= 99)) {
+                                            setSalePercent(val);
+                                        }
+                                    }}
+                                    placeholder="Например: 10, 50, 90"
+                                    min="0"
+                                    max="99"
+                                />
                             </div>
 
                             <div className="admin-section-label">Целевая аудитория (Гендер):</div>

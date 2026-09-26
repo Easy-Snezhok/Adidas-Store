@@ -5,6 +5,7 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+    const [onlySale, setOnlySale] = useState(false);
 
     const filtersRef = useRef(null);
 
@@ -31,7 +32,9 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
 
         const matchesNew = !onlyNew || product.isNew === true;
 
-        return matchesSearch && matchesCategory && matchesGender && matchesNew;
+        const matchesSale = !onlySale || (product.salePercent !== undefined && product.salePercent > 0);
+
+        return matchesSearch && matchesCategory && matchesGender && matchesNew && matchesSale;
     });
 
     const handleReset = () => {
@@ -39,6 +42,7 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
         setSelectedGender('');
         setSearchQuery('');
         setOnlyNew(false);
+        setOnlySale(false);
         setIsFiltersOpen(false);
     };
 
@@ -100,6 +104,14 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
                     className={`filter-btn ${isFiltersOpen ? 'mobile-show' : ''} ${selectedGender === 'kids' ? 'active' : ''}`}>
                         Детям
                 </button>
+
+                <button 
+                    onClick={() => { setOnlySale(!onlySale); setSelectedCategory(''); setSelectedGender(''); setOnlyNew(false); }}
+                    className={`filter-btn ${isFiltersOpen ? 'mobile-show' : ''} ${onlySale ? 'active' : ''}`}
+                    style={onlySale ? { color: '#E22120', borderColor: '#E22120', backgroundColor: '#fdf2f2' } : {}}
+                >
+                    Скидки
+                </button>
                 </div>
 
                 <input
@@ -138,6 +150,7 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
                                 key={product.id}
                                 title={product.title}
                                 price={product.price}
+                                salePercent={product.salePercent}
                                 image={currentCardImage}
                                 onBuyClick={() => onOpenProduct(product)}
                                 onCardClick={() => onOpenProduct(product)}

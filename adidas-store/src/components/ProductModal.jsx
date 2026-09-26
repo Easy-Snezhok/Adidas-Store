@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect } from 'react';
 
 function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], onFavClick}) {
     const [activeColorIndex, setActiveColorIndex] = useState(0);
@@ -7,6 +7,28 @@ function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], on
 
     const [cachedProduct, setCachedProduct] = useState(null);
     const [prevProductId, setPrevProductId] = useState(null);
+
+    useEffect(() => {
+        if (!isOpen || !product || !product.images) return;
+
+        console.log("⚡️ Запущена фоновая предзагрузка ракурсов товара в кэш...");
+        const allImageUrls = [];
+        
+        Object.values(product.images).forEach(colorArray => {
+            if (Array.isArray(colorArray)) {
+                colorArray.forEach(url => {
+                    if (url && url.trim() !== '') allImageUrls.push(url.trim());
+                });
+            } else if (typeof colorArray === 'string' && colorArray.trim() !== '') {
+                allImageUrls.push(colorArray.trim());
+            }
+        });
+
+        allImageUrls.forEach((url) => {
+            const img = new Image();
+            img.src = url;
+        });
+    }, [product, isOpen]);
 
     if (product && product !== cachedProduct) {
         setCachedProduct(product);
@@ -23,7 +45,7 @@ function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], on
 
     const displayProduct = cachedProduct;
     const currentColorName = displayProduct.colors[activeColorIndex]?.name || 'white';
-    const imagesArray = Array.isArray(displayProduct.images[currentColorName])
+    const imagesArray = Array.isArray(displayProduct.images?.[currentColorName])
         ? displayProduct.images[currentColorName]
         : [displayProduct.images[currentColorName] || Object.values(displayProduct.images)[0]];
 
@@ -66,7 +88,12 @@ function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], on
                                 >
                                     {imagesArray.map((imgUrl, idx) => (
                                         <div key={idx} className="product-modal-slide-item">
-                                            <img src={imgUrl} alt={`${displayProduct.title} ракурс ${idx + 1}`}/>
+                                            <img 
+                                                src={imgUrl} 
+                                                alt={`${displayProduct.title} ракурс ${idx + 1}`}
+                                                loading="eager"
+                                                decoding="async"
+                                            />
                                         </div>
                                     ))}
                                 </div>
