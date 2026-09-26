@@ -16,6 +16,34 @@ function Checkout({cartItems = [], onOrderComplete}) {
     const [bankError, setBankError] = useState('');
     const [finalTotal, setFinalTotal] = useState(0);
 
+    const handleCardNumberChange = (e) => {
+        const input = e.target.value.replace(/\D/g, '').substring(0, 16);
+
+        const formatted = input.match(/.{1,4}/g)?.join(' ') || '';
+
+        setCardNumber(formatted);
+    };
+
+    const handleCardExpiryChange = (e) => {
+        let input = e.target.value.replace(/\D/g, '');
+
+        if (input.length === 1 && input > '1') {
+            input = '0' + input;
+        }
+
+        if (input.length === 2 && Number(input) > 12) {
+            input = '12';
+        }
+
+        input = input.substring(0, 4);
+
+        let formatted = input;
+        if (input.length > 2) {
+            formatted = `${input.substring(0, 2)}/${input.substring(2)}`;
+        }
+        setCardExpiry(formatted);
+    }
+
     const checkoutTotal = cartItems.reduce((sum, item) => sum + item.price, 0);
 
     const formatPhoneNumber = (value) => {
@@ -165,7 +193,9 @@ function Checkout({cartItems = [], onOrderComplete}) {
 
             <div className={`custom-alert-overlay ${isBankFormOpen ? 'open' : ''}`}>
                 <div className="checkout-bank-card">
-                    <div className="checkout-bank-icon">💳</div>
+                    <div className="checkout-bank-icon">
+                        <img src="icons/card-bank.svg" alt="Банковская карта" className="checkout-svg-card-icon" />
+                    </div>
                     <h2>Оплата</h2>
                     <p className="checkout-bank-subtitle">Adidas Store</p>
 
@@ -176,9 +206,9 @@ function Checkout({cartItems = [], onOrderComplete}) {
                                 type="text"
                                 required
                                 maxLength="19"
-                                placeholder="4111 1111 1111 1111"
+                                placeholder="0000 0000 0000 0000"
                                 value={cardNumber}
-                                onChange={(e) => setCardNumber(e.target.value.replace(/[^\d\s]/g, ''))}
+                                onChange={handleCardNumberChange}
                             />
                         </div>
 
@@ -189,9 +219,9 @@ function Checkout({cartItems = [], onOrderComplete}) {
                                     type="text"
                                     required
                                     maxLength="5"
-                                    placeholder="12/29"
+                                    placeholder="ММ/ГГ"
                                     value={cardExpiry}
-                                    onChange={(e) => setCardExpiry(e.target.value)}
+                                    onChange={handleCardExpiryChange}
                                 />
                             </div>
                             <div className="input-group">

@@ -1157,6 +1157,21 @@ h1 {
     margin: 15px 0;
 }
 
+.checkout-card-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.checkout-svg-card-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}
+/**/
+
 /*СТИЛИ МОДАЛКИ УСПЕШНОГО ЗАКАЗА*/
 .success-overlay {
     position: fixed;
