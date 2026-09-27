@@ -18,6 +18,14 @@ import { doc, setDoc, getDoc, collection, onSnapshot, addDoc } from 'firebase/fi
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+  const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
+  const [returnOrderId, setReturnOrderId] = useState('');
+  const [returnReason, setReturnReason] = useState('');
+  const [returnContact, setReturnContact] = useState('');
+  const [returnSuccess, setReturnSuccess] = useState('');
+  const [returnError, setReturnError] = useState('');
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [globalGender, setGlobalGender] = useState('');
   const [globalNewOnly, setGlobalNewOnly] = useState(false);
@@ -193,6 +201,35 @@ function App() {
     };
     setCart([...cart, productWithDiscount]);
   };
+
+  const handleReturnSubmit = async (e) => {
+    e.preventDefault();
+    setReturnSuccess('');
+    setReturnError('');
+
+    if (!returnOrderId.trim() || !returnReason.trim() || !returnContact.trim()) {
+      setReturnError('Пожалуйста, заполните все три поля заявки!');
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "return_requrests"), {
+        orderId: returnOrderId.trim(),
+        reason: returnReason.trim(),
+        contact: returnContact.trim(),
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      });
+
+       setReturnSuccess('Заявка успешно отправлена! Менеджер свяжется с вами в Telegram или по телефону.');
+      setReturnOrderId('');
+      setReturnReason('');
+      setReturnContact('');
+    } catch (error) {
+      console.error("Ошибка сохранения заявки на возврат:", error);
+      setReturnError(`Не удалось отправить данные: ${error.message}`);
+    }
+  }
 
   const removeFromCart = (indexToRemove) => {
     setCart(cart.filter((_, index) => index !== indexToRemove));
@@ -372,6 +409,9 @@ function App() {
             setGlobalGender('');
             setCurrentPage('catalog');
           }}
+        onOpenDelivery={() => setIsDeliveryModalOpen(true)}
+        onOpenReturn={() => setIsReturnModalOpen(true)}
+        onOpenContact={() => setIsContactModalOpen(true)}
         />
 
         <CartModal 
@@ -400,6 +440,128 @@ function App() {
             setCurrentPage('profile');
           }}
         />
+
+        {isDeliveryModalOpen && (
+          <div 
+            className="info-modal-overlay"
+            onClick={(e) => {if (e.target.className === 'info-modal-overlay') setIsDeliveryModalOpen(false); }}
+          >
+            <div className="info-modal-content">
+              <button className="info-modal-close-btn" onClick={() => setIsDeliveryModalOpen(false)}>&times;</button>
+
+              <div className="info-modal-body-text">
+                <h2>Доставка и оплата</h2>
+                <p><strong>Курьерская доставка:</strong> Мы доставляем заказы по всей России с помощью курьерских служб СДЭК и Boxberry до двери или в пункты выдачи.</p>
+                <p><strong>Сроки доставки:</strong> От 2 до 5 рабочих дней в зависимости от вашего региона. При заказе от 15 000 ₽ доставка бесплатная.</p>
+                <p><strong>Способы оплаты:</strong> Вы можете безопасно оплатить заказ банковской картой прямо на сайте через нашу защищенную форму оплаты.</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isReturnModalOpen && (
+        <div 
+          className="info-modal-overlay" 
+          onClick={(e) => { if (e.target.className === 'info-modal-overlay') { setIsReturnModalOpen(false); setReturnSuccess(''); setReturnError(''); } }}
+        >
+          <div className="info-modal-content return-modal-width">
+            <button 
+              type="button"
+              className="info-modal-close-btn" 
+              onClick={() => { setIsReturnModalOpen(false); setReturnSuccess(''); setReturnError(''); }}
+            >
+              &times;
+            </button>
+            
+            <div className="info-modal-body-text">
+              <h2>Возврат товара</h2>
+              
+              <div className="return-rules-box">
+                <p><strong>1. Сроки:</strong> Вы можете вернуть кроссовки в течение 14 дней с момента получения.</p>
+                <p><strong>2. Состояние:</strong> Обувь должна сохранить товарный вид, оригинальные бирки и фирменную коробку Adidas.</p>
+                <p><strong>3. Процесс:</strong> Заполните заявку ниже. После проверки менеджер пришлёт вам трек-номер для бесплатной отправки через СДЭК.</p>
+              </div>
+
+              {returnSuccess && <p className="return-status-msg success-msg">{returnSuccess}</p>}
+              {returnError && <p className="return-status-msg error-msg">{returnError}</p>}
+
+              {!returnSuccess && (
+                <form onSubmit={handleReturnSubmit} className="return-interactive-form">
+                  <span className="return-form-title">Заявка на возврат:</span>
+                  
+                  <input
+                    type="text"
+                    value={returnOrderId}
+                    onChange={(e) => setReturnOrderId(e.target.value)}
+                    placeholder="Номер вашего заказа (например: 471f323)"
+                  />
+
+                  <textarea
+                    value={returnReason}
+                    onChange={(e) => setReturnReason(e.target.value)}
+                    placeholder="Причина возврата (не подошел размер, цвет, брак...)"
+                    rows="3"
+                  />
+
+                  <input
+                    type="text"
+                    value={returnContact}
+                    onChange={(e) => setReturnContact(e.target.value)}
+                    placeholder="Ваш Telegram или Телефон для связи"
+                  />
+
+                  <button type="submit" className="return-submit-btn">
+                    Отправить заявку
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isContactModalOpen && (
+        <div 
+          className="info-modal-overlay"
+          onClick={(e) => {if (e.target.className === 'info-modal-overlay') setIsContactModalOpen(false);}}
+        >
+          <div className="info-modal-content contact-modal-width">
+            <button
+              type="button"
+              className="info-modal-close-btn"
+              onClick={() => setIsContactModalOpen(false)}
+            >
+              &times;
+            </button>
+
+            <div className="info-modal-body-text">
+              <h2>Связаться с нами</h2>
+              <p>Выберите любой удобный способ связи. Наши менеджеры ответят вам в кратчайшие сроки.</p>
+
+              <div className="contact-links-container">
+                <a href="tel:+78005553535" className="contact-premium-btn phone-btn">
+                  <span className="contact-btn-label">Позвонить на горячую линию:</span>
+                  <strong className="contact-btn-value">+7 (800) 555-35-35</strong>
+                </a>
+
+                <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="contact-premium-btn telegram-btn">
+                  <span className="contact-btn-label">Написать в Telegram:</span>
+                  <strong className="contact-btn-value">@adidas_shop_support</strong>
+                </a>
+
+                <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="contact-premium-btn gmail-btn">
+                  <span className="contact-btn-label">Написать на Почту:</span>
+                  <strong className="contact-btn-value">support@adidas-store.ru</strong>
+                </a>
+              </div>
+
+               <div className="contact-worktime-badge">
+                Режим работы поддержки: 24/7 (Круглосуточно)
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

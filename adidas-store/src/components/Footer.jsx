@@ -1,4 +1,4 @@
-function Footer({changePage, onNavigateNew}) {
+function Footer({changePage, onNavigateNew, onOpenDelivery, onOpenReturn, onOpenContact}) {
     return (
         <footer className = "site-footer">
             <div className = "footer-container">
@@ -14,9 +14,9 @@ function Footer({changePage, onNavigateNew}) {
                 <div className = "footer-block">
                     <h3>Поддержка</h3>
                     <ul>
-                        <li>Доставка и оплата</li>
-                        <li>Возврат товара</li>
-                        <li>Связаться с нами</li>
+                        <li onClick={onOpenDelivery}>Доставка и оплата</li>
+                        <li onClick={onOpenReturn}>Возврат товара</li>
+                        <li onClick={onOpenContact}>Связаться с нами</li>
                     </ul>
                 </div>
 
