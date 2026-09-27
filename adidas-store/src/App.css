@@ -4025,3 +4025,74 @@ h1 {
     }
 
 }
+
+@media (min-width: 1025px) {
+    body .profile-main-page {
+        max-width: 96% !important;
+        width: 100% !important;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+    }
+
+    body .profile-container {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    body .admin-dashboard-grid {
+        display: grid !important;
+        grid-template-columns: 260px 1fr 440px !important;
+        gap: 30px !important;
+        align-items: flex-start;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    body .admin-main-content-flow {
+        display: contents !important;
+    }
+
+    body .admin-left-sidebar {
+        position: sticky;
+        top: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    body .admin-workspace-panel {
+        grid-column: 2 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border: 1px solid #b6b5b5 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+        box-sizing: border-box;
+    }
+
+    body .admin-dashboard-grid .admin-workspace-panel + section,
+    body .admin-crm-orders-section {
+        grid-column: 3 !important;
+        position: sticky;
+        top: 120px;
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        margin-top: 0 !important;
+        border: 1px solid #b6b5b5 !important;
+        padding: 30px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    body .admin-dashboard-grid .admin-workspace-panel + section::-webkit-scrollbar {
+        width: 5px;
+    }
+    body .admin-dashboard-grid .admin-workspace-panel + section::-webkit-scrollbar-thumb {
+        background-color: #000000;
+        border-radius: 10px;
+    }
+}

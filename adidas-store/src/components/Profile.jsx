@@ -394,7 +394,8 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                         <div className="admin-main-content-flow">
                             <section className="profile-card-section admin-workspace-panel">
                                 {adminSuccessMessage && <p className="admin-status-success">{adminSuccessMessage}</p>}
-                        {adminErrorMessage && <p className="admin-status-error">{adminErrorMessage}</p>}
+                                {adminErrorMessage && <p className="admin-status-error">{adminErrorMessage}</p>}
+                         
                          <form onSubmit={handleAddProductSubmit} className="admin-add-product-form">
                             <div className="admin-mode-toggle-group">
                                 <label className="admin-clickable-label">
@@ -585,8 +586,9 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                                 )}
                             </div>
                         </form>
+                            </section>
 
-                        <div className="admin-crm-orders-section">
+                            <div className="admin-crm-orders-section">
                             <h3 className="admin-crm-title">Входящие заказы покупателей</h3>
 
                             {(!globalOrders || globalOrders.length === 0) ? (
@@ -661,7 +663,6 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                                 </div>
                             )}
                             </div>
-                            </section>
                         </div>
                     </div>
                 ) : (
