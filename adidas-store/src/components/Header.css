@@ -1,0 +1,206 @@
+header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    justify-content: space-between;
+    padding: 20px 50px;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.header-logo-link {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    cursor: pointer;
+}
+
+.header-logo-link img {
+    height: 70px;
+    width: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+li {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+li:hover {
+    color: #0051BA;
+    cursor: pointer;
+}
+
+.header-icon-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header-right-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.profile-icon-wrapper {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    bottom: 1px;
+}
+
+.icon-user {
+    width: 25px;
+    height: auto;
+    display: block;
+}
+
+.user-online-dot {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background-color: #0051BA;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+.hamburger-icon-btn {
+    display: none;
+}
+
+.icon-heart {
+    width: 25px;
+}
+
+.favorite-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/*МОБИЛКА ДЛЯ HEADER*/
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        height: 90px;
+        background-color: #ffffff;
+        z-index: 2000;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .header-logo-link {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+    }
+
+    .logotip {
+        height: 28px;
+        display: block;
+    }
+
+    .header-right-icons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        z-index: 1000;
+        margin-left: auto;
+    }
+
+    header ul:not(.nav-menu-list) {
+        display: none;
+    }
+
+    .hamburger-icon-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        z-index: 2500;
+    }
+
+    .hamburger-icon-btn span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #000000;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger-icon-btn.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger-icon-btn.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-icon-btn.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    body header ul.nav-menu-list {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        width: 100%;
+        height: auto;
+        background-color: #ffffff;
+        padding: 110px 20px 30px 20px;
+        box-sizing: border-box;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: top 0.3s ease-in-out;
+        z-index: 1500;
+        gap: 15px;
+    }
+
+    body header ul.nav-menu-list.mobile-open {
+        top: -50px;
+    }
+
+    body header ul.nav-menu-list li {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        font-size: 16px;
+        border-bottom: 1px solid #f5f5f5;
+        color: #000000;
+    }
+}

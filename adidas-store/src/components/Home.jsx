@@ -1,5 +1,6 @@
 import ProductCard from './ProductCard';
 import { products } from '../productsData';
+import './Home.css';
 
 function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setGenderFilter, onRemoveModel}) {
   const newArrivals = [products[9], products[7], products[16]];

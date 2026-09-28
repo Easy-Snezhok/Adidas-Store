@@ -32,6 +32,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [globalOrders, setGlobalOrders] = useState([]);
+  const [returnRequests, setReturnRequests] = useState([]);
 
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
@@ -112,6 +113,31 @@ function App() {
     });
 
     return () => unsubscribeFromGlobalOrders();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribeFromReturnRequests = onSnapshot(collection(db, "return_requrests"), (querySnapshot) => {
+      const returnsArray = [];
+
+      querySnapshot.forEach((doc) => {
+        returnsArray.push({
+          ...doc.data(),
+          cloudReturnId: doc.id
+        });
+      });
+
+       returnsArray.sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+        const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+        return dateB - dateA;
+      });
+
+      setReturnRequests(returnsArray);
+      console.log("Лента возвратов заказов успешно синхронизирована");
+    }, (error) => {
+      console.error("Ошибка при получении Ленты заказов:", error);
+    });
+    return () => unsubscribeFromReturnRequests();
   }, []);
 
   useEffect(() => {
@@ -386,6 +412,7 @@ function App() {
               orders = {orders}
               products = {products}
               globalOrders = {globalOrders}
+              returnRequests = {returnRequests}
               onClearOrders = {clearUserOrdersHistory}
               onLogout = {() => {
                 setCurrentUser(null);

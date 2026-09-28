@@ -1,0 +1,126 @@
+.about-main-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 20px 40px 20px;
+    font-family: sans-serif;
+}
+
+.about-hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-hero h1 {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+    color: #000000;
+}
+
+.about-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0051BA;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.about-section {
+    margin-bottom: 40px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+}
+
+.about-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+}
+
+.about-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333333;
+    margin: 0;
+}
+
+.about-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.about-info-block {
+    flex: 1;
+}
+
+.about-info-block h3 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+    color: #000000;
+}
+
+.about-info-block p {
+    font-size: 14px;
+    color: #666666;
+    margin: 0 0 6px 0;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e2e2e2;
+}
+
+.map-wrapper iframe {
+    position: relative;
+    border-radius: 8px;
+}
+
+.profile-email-link {
+    color: #0051BA;
+    text-decoration: none;
+    padding-bottom: 2px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-top: 5px;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-email-link:hover {
+    color: #0051BA;
+    transform: translateY(-1px);
+}
+
+/*МОБИЛКА ДЛЯ ABOUT*/
+@media (max-width: 768px) {
+    .about-main-page {
+        padding-top: 140px;
+    }
+    .about-hero h1 {
+        font-size: 32px;
+    }
+    .about-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .about-section {
+        padding: 20px;
+    }
+    .map-wrapper {
+        height: 180px;
+    }
+}

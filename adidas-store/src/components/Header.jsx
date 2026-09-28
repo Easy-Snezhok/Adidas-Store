@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import './Header.css';
 
 function Header({changePage, openCart, cartCount, favCount, onNavigateNew, openAuth, user}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

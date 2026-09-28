@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import ProductCard from './ProductCard';
+import './Catalog.css';
 
 function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, setSelectedGender, onlyNew, setOnlyNew, onRemoveModel, products: dbProducts}) {
     const [selectedCategory, setSelectedCategory] = useState('');

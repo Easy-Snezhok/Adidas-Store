@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification } from 'firebase/auth';
+import './AuthModal.css';
 
 function AuthModal({ isOpen, onClose, onAuthSuccess }) {
     const [authMode, setAuthMode] = useState('login');

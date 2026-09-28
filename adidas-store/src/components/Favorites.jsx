@@ -1,3 +1,5 @@
+import './Favorites.css';
+
 function Favorites({favoriteItems, onToggleFavorite, onClearFavorites, onOpenProduct}) {
     return (
         <main className = "favorites-main">

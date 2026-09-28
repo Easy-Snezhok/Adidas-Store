@@ -1,3 +1,5 @@
+import './ProductCard.css';
+
 function ProductCard({ isNew, salePercent = 0, image, title, price, onCardClick, onBuyClick, onFavClick, isFavorite }) {
 
     const hasSale = salePercent > 0;

@@ -1,3 +1,5 @@
+import './Footer.css';
+
 function Footer({changePage, onNavigateNew, onOpenDelivery, onOpenReturn, onOpenContact}) {
     return (
         <footer className = "site-footer">

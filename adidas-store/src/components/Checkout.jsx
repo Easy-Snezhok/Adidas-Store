@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Checkout.css';
 
 function Checkout({cartItems = [], onOrderComplete}) {
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);

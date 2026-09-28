@@ -1,0 +1,115 @@
+.favorites-main {
+    padding-top: 120px;
+    padding-left: 60px;
+    padding-right: 60px;
+    box-sizing: border-box;
+    min-height: calc(100vh - 250px); 
+    display: flex;
+    flex-direction: column;
+}
+
+.favorites-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: #000000;
+}
+
+.empty-favorites-text {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.favorites-actions-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.clear-favorites-btn {
+    background: none;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-favorites-btn:hover {
+    background-color: #0051BA;
+    color: #ffffff;
+    border: 1px solid #0051BA;
+}
+
+.favorites-list-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.favorites-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #EEEEEE;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorites-list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.fav-item-info h4 {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.fav-item-info p {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.favorite-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.favorite-badge {
+    display: flex;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #0051BA;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+/*МОБИЛКА ДЛЯ ИЗБРАННОГО*/
+@media (max-width: 768px) {
+    .favorites-main {
+        padding-top: 80px;
+    }
+}

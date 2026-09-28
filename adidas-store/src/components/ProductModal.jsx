@@ -1,4 +1,5 @@
 import {useState, useEffect } from 'react';
+import './ProductModal.css';
 
 function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], onFavClick}) {
     const [activeColorIndex, setActiveColorIndex] = useState(0);

@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { auth, db } from '../firebase';
 import { signOut, deleteUser } from 'firebase/auth';
 import { doc, getDoc, collection, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+import './Profile.css';
 
-function Profile({ user, onLogout, orders = [], products = [], globalOrders = [], onClearOrders }) {
+function Profile({ user, onLogout, orders = [], products = [], globalOrders = [], onClearOrders, returnRequests = [] }) {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [settingsError, setSettingsError] = useState('');
@@ -588,83 +589,111 @@ function Profile({ user, onLogout, orders = [], products = [], globalOrders = []
                         </form>
                             </section>
 
+                            <div className="admin-right-crm-column">
+                            
                             <div className="admin-crm-orders-section">
-                            <h3 className="admin-crm-title">Входящие заказы покупателей</h3>
+                                <h3 className="admin-crm-title">Входящие заказы покупателей</h3>
 
-                            {(!globalOrders || globalOrders.length === 0) ? (
-                                <p className="admin-crm-empty-text">Новых заказов в магазине пока нет.</p>
-                            ) : (
-                                <div className="admin-crm-orders-list">
-                                    {globalOrders.map((gOrder) => {
-                                        const orderKey = gOrder.cloudOrderId || `crm_order_${gOrder.id}`;
+                                {(!globalOrders || globalOrders.length === 0) ? (
+                                    <p className="admin-crm-empty-text">Новых заказов в магазине пока нет.</p>
+                                ) : (
+                                    <div className="admin-crm-orders-list">
+                                        {globalOrders.map((gOrder) => {
+                                            const orderKey = gOrder.cloudOrderId || `crm_order_${gOrder.id}`;
 
-                                        return (
-                                            <div key={orderKey} className="admin-crm-order-card">
-                                                <div className="admin-crm-order-header">
-                                                    <span className="admin-crm-order-number">Заказ №{gOrder.id}</span>
-                                                    <span className="admin-crm-order-date">{gOrder.date}</span>
-                                                </div>
-
-                                                <div className="admin-crm-customer-info">
-                                                    <div className="admin-crm-customer-row">
-                                                        <span>Имя клиента:</span> <strong>{gOrder.customerName || 'Не указан'}</strong>
+                                            return (
+                                                <div key={orderKey} className="admin-crm-order-card">
+                                                    <div className="admin-crm-order-header">
+                                                        <span className="admin-crm-order-number">Заказ №{gOrder.id}</span>
+                                                        <span className="admin-crm-order-date">{gOrder.date}</span>
                                                     </div>
 
-                                                     <div className="admin-crm-customer-row">
-                                                        <span>Телефон:</span> <strong>{gOrder.customerPhone || 'Не указан'}</strong>
+                                                    <div className="admin-crm-customer-info">
+                                                        <div className="admin-crm-customer-row">
+                                                            <span>Имя клиента:</span> <strong>{gOrder.customerName || 'Не указан'}</strong>
+                                                        </div>
+                                                        <div className="admin-crm-customer-row">
+                                                            <span>Телефон:</span> <strong>{gOrder.customerPhone || 'Не указан'}</strong>
+                                                        </div>
+                                                        <div className="admin-crm-customer-row">
+                                                            <span>Адрес:</span> <strong>{gOrder.customerAddress || 'Не указан'}</strong>
+                                                        </div>
+                                                        <div className="admin-crm-customer-row">
+                                                            <span>Email:</span> <strong className="admin-crm-email-text">{gOrder.customerEmail}</strong>
+                                                        </div>
                                                     </div>
 
-                                                    <div className="admin-crm-customer-row">
-                                                        <span>Адрес:</span> <strong>{gOrder.customerAddress || 'Не указан'}</strong>
-                                                    </div>
-
-                                                    <div className="admin-crm-customer-row">
-                                                        <span>Email аккаунта:</span> <strong className="admin-crm-email-text">{gOrder.customerEmail}</strong>
-                                                    </div>
-                                                </div>
-
-                                                <div className="admin-crm-order-items">
-                                                    {Array.isArray(gOrder.items) && gOrder.items.map((item, idx) => {
-                                                        const itemImg = Array.isArray(item.image) ? item.image[0] : item.image;
-                                                        return (
-                                                            <div key={`${orderKey}_item_${idx}`} className="admin-crm-item-row">
-                                                                <img src={itemImg || 'icon/Basket.svg'} alt={item.title} className="admin-crm-item-img" />
-                                                                <div className="admin-crm-item-details">
-                                                                    <h4>{item.title}</h4>
-                                                                    <p>Размер: {item.selectedSize} |</p>
+                                                    <div className="admin-crm-order-items">
+                                                        {Array.isArray(gOrder.items) && gOrder.items.map((item, idx) => {
+                                                            const itemImg = Array.isArray(item.image) ? item.image : item.image;
+                                                            return (
+                                                                <div key={`${orderKey}_item_${idx}`} className="admin-crm-item-row">
+                                                                    <img src={itemImg || 'icon/Basket.svg'} alt={item.title} className="admin-crm-item-img" />
+                                                                    <div className="admin-crm-item-details">
+                                                                        <h4>{item.title}</h4>
+                                                                        <p>Размер: {item.selectedSize} |</p>
+                                                                    </div>
+                                                                    <span className="admin-crm-item-price">{item.price} ₽</span>
                                                                 </div>
-                                                                <span className="admin-crm-item-price">{item.price} <span className="currency-rub">₽</span></span>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-
-                                                <div className="admin-crm-order-footer">
-                                                    <div className="admin-crm-status-wrapper">
-                                                        <span className={`admin-crm-status-badge ${gOrder.status === 'completed' ? 'completed' : 'pending'}`}>
-                                                            {gOrder.status === 'completed' ? 'Выполнен' : 'В обработке'}
-                                                        </span>
-
-                                                        {gOrder.status !== 'completed' && (
-                                                            <button
-                                                                type="button"
-                                                                className="admin-crm-complete-order-btn"
-                                                                onClick={() => handleUpdateOrderStatus(gOrder.cloudOrderId)}
-                                                            >
-                                                                Завершить
-                                                            </button>
-                                                        )}
+                                                            );
+                                                        })}
                                                     </div>
-                                                    <span className="admin-crm-total">Итого: <strong>{gOrder.total} <span className="currency-rub">₽</span></strong></span>
+
+                                                    <div className="admin-crm-order-footer">
+                                                        <div className="admin-crm-status-wrapper">
+                                                            <span className={`admin-crm-status-badge ${gOrder.status === 'completed' ? 'completed' : 'pending'}`}>
+                                                                {gOrder.status === 'completed' ? 'Выполнен' : 'В обработке'}
+                                                            </span>
+                                                            {gOrder.status !== 'completed' && (
+                                                                <button
+                                                                    type="button"
+                                                                    className="admin-crm-complete-order-btn"
+                                                                    onClick={() => handleUpdateOrderStatus(gOrder.cloudOrderId)}
+                                                                >
+                                                                    Завершить
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                        <span className="admin-crm-total">Итого: <strong>{gOrder.total} ₽</strong></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
+                                            );
+                                        })}
+                                    </div>
+                                )}
                             </div>
+
+                            <div className="admin-crm-returns-container">
+                                <h3 className="admin-crm-title">Заявки на возврат товара</h3>
+
+                                {(!returnRequests || returnRequests.length === 0) ? (
+                                    <p className="admin-crm-empty-text">Заявок на возврат пока нет.</p>
+                                ) : (
+                                    <div className="admin-crm-returns-list">
+                                        {returnRequests.map((req) => {
+                                            const returnKey = req.cloudReturnId;
+                                            
+                                            return (
+                                                <div key={returnKey} className="admin-crm-order-card return-card-dashed">
+                                                    <div className="admin-crm-customer-row">
+                                                        <span>Номер заказа:</span> <strong>{req.orderId || 'Не указан'}</strong>
+                                                    </div>
+                                                    <div className="admin-crm-customer-row" style={{ marginTop: '6px', marginBottom: '6px' }}>
+                                                        <span>Причина:</span> <span style={{ color: '#4d4d4d', fontWeight: '500' }}>{req.reason || 'Не указана'}</span>
+                                                    </div>
+                                                    <div className="admin-crm-customer-row">
+                                                        <span>Контакты:</span> <strong style={{ color: '#0051BA' }}>{req.contact || 'Не указаны'}</strong>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+
                         </div>
                     </div>
+                </div>
                 ) : (
                     <>
                     <section className="profile-card-section">

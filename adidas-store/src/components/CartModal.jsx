@@ -1,3 +1,5 @@
+import './CartModal.css';
+
 function CartModal({isOpen, closeCart, changePage, cartItems, onRemoveItem, onClearCart}) {
     const totalSum = cartItems.reduce((sum, item) => sum + item.price, 0);
     return (
