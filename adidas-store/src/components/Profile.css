@@ -1,101 +1,29 @@
-.profile-main-page {
-    max-width: 800px;
+main.profile-main-page {
+    max-width: 96%;
+    width: 100%;
     margin: 0 auto;
     padding: 120px 20px 40px 20px;
+    box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.profile-main-page .profile-empty {
-    text-align: center;
-    padding-top: 150px;
-}
-
-.profile-container {
+main.profile-main-page .profile-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
-}
-
-.profile-hero-section {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.profile-hero-section h1 {
-    font-size: 42px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin: 0 0 10px 0;
-    color: #000000;
-    text-transform: uppercase;
-}
-
-.profile-subtitle-text {
-    font-size: 15px;
-    font-weight: 500;
-    color: #4d4d4d;
-    letter-spacing: 1px;
-    margin: 0;
-}
-
-.profile-user-email {
-    font-weight: bold;
-    color: #0051BA;
-}
-
-.profile-card-section {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-    border: 1px solid #f0f0f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.profile-user-states h2, 
-.profile-history-section h2 {
-    font-size: 22px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0 0 10px 0;
-    letter-spacing: 1px;
-    color: #000000;
-}
-
-.profile-status-label {
-    font-size: 14px;
-    color: #666666;
-    margin: 0;
+    width: 100%;
 }
 
 .profile-status-highlight {
     color: #0051BA;
-    font-weight: 550;
+    font-weight: 600;
 }
 
-.profile-logout-btn {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 12px 25px;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.profile-logout-btn:hover {
-    background-color: #0051BA;
-    transform: translateY(-2px);
-}
-
-.profile-history-section {
+main.profile-main-page .profile-hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
@@ -103,57 +31,86 @@
     border: 1px solid #f0f0f0;
 }
 
-.profile-orders-placeholder {
-    padding: 40px 10px;
-    text-align: center;
-    border-radius: 8px;
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+main.profile-main-page .profile-header-title-wrapper h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+    color: #000000;
 }
 
-.profile-empty-icon {
-    width: 40px;
-    height: auto;
-    opacity: 0.3;
-}
-
-.profile-empty-title {
+main.profile-main-page .profile-subtitle-text {
+    font-size: 15px;
+    font-weight: 500;
     color: #4d4d4d;
-    font-size: 16px;
+    margin: 0;
+}
+
+main.profile-main-page .profile-user-email {
     font-weight: bold;
-    margin: 0;
+    color: #0051BA;
 }
 
-.profile-empty-subtitle {
-    color: #999999;
-    font-size: 13px;
-    margin: 0;
+main.profile-main-page .profile-settings-dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
 }
 
-.profile-header-title-wrapper {
-    text-align: center;
+main.profile-main-page .admin-toggle-btn {
+    border: none;
+    background: none;
+    width: 45px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    position: relative;
-    max-width: fit-content;
-    margin: 0 auto 10px auto;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.profile-settings-dropdown-wrapper {
-    position: relative;
-    max-width: fit-content;
-    margin: 20px 0 0 0;
+main.profile-main-page .admin-svg-icon {
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+main.profile-main-page .admin-header-crm-nav {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    gap: 10px;
+    background-color: #f5f5f5;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
 }
 
-.profile-settings-toggle-btn {
+main.profile-main-page .admin-crm-nav-link {
+    background: none;
+    border: none;
+    color: #555555;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+main.profile-main-page .admin-crm-nav-link:hover {
+    color: #000000;
+    background-color: #e9e9e9;
+}
+
+main.profile-main-page .admin-crm-nav-link.active {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+main.profile-main-page .profile-settings-toggle-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -164,25 +121,22 @@
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.profile-settings-toggle-btn img {
+main.profile-main-page .profile-settings-toggle-btn img {
     width: 28px;
     height: 28px;
     display: block;
 }
 
-.profile-settings-toggle-btn:hover {
-    transform: scale(1.1);
-}
-
-.profile-settings-toggle-btn.rotated {
+main.profile-main-page .profile-settings-toggle-btn.rotated {
     transform: rotate(90deg);
 }
 
-.profile-card-section.profile-settings-panel {
+main.profile-main-page .profile-card-section.profile-settings-panel {
     position: absolute;
     top: calc(100% + 10px);
-    left: 0;
-    width: 280px;
+    left: unset;
+    right: 0;
+    width: 500px;
     background-color: #ffffff;
     padding: 25px;
     border-radius: 16px;
@@ -192,26 +146,13 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    animation: fadeInDropdown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.profile-settings-info {
-    flex: 1;
+main.profile-main-page .profile-settings-info {
     text-align: left;
 }
 
-.profile-settings-info h2 {
-    font-size: 16px;
-    margin: 0 0 6px 0;
-}
-
-.profile-settings-info .profile-status-label {
-    font-size: 12px;
-    line-height: 1.4;
-    color: #666666;
-}
-
-.profile-delete-btn {
+main.profile-main-page .profile-delete-btn {
     background: none;
     color: #D32F2F;
     border: 1px solid #D32F2F;
@@ -222,255 +163,139 @@
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.profile-delete-btn:hover {
+main.profile-main-page .profile-delete-btn:hover {
     background-color: #D32F2F;
     color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
 }
 
-.profile-settings-error-text {
-    color: #D32F2F;
-    font-size: 13px;
-    font-weight: bold;
-    margin: 8px 0 0 0;
+main.profile-main-page .admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.profile-orders-list-wrapper {
+main.profile-main-page .admin-main-content-flow {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+main.profile-main-page .admin-left-sidebar {
+    position: sticky;
+    top: 120px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 15px;
-}
-
-.profile-order-card {
-    border: 1px solid #e2e2e2;
-    border-radius: 12px;
-    padding: 20px;
-    background-color: #ffffff;
-}
-
-.profile-order-card-header {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.profile-order-number {
-    font-weight: bold;
-    font-size: 15px;
-    color: #000000;
-}
-
-.profile-order-date {
-    color: #888888;
-    font-size: 14px;
-}
-
-.profile-order-items-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.profile-order-item-row {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.profile-order-item-img {
-    width: 50px;
-    height: 40px;
-    object-fit: contain;
-}
-
-.profile-order-item-info {
-    flex: 1;
-}
-
-.profile-order-item-size {
-    font-size: 12px;
-    color: #777777;
-    text-transform: uppercase;
-}
-
-.profile-order-item-price {
-    font-weight: bold;
-    font-size: 14px;
-    color: #000000;
-}
-
-.profile-order-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid #eeeeee;
-}
-
-.profile-order-status {
-    font-size: 14px;
-    color: #000000;
-}
-
-.profile-order-status-highlight {
-    color: #0051BA;
-    font-weight: bold;
-}
-
-.profile-order-total-sum {
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
-    margin-left: 10px;
-}
-
-.profile-order-total-highlight {
-    color: #0051BA;
-}
-
-.profile-orders-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-}
-
-.profile-orders-header-row h2 {
-    margin: 0;
-}
-
-.profile-clear-history-btn {
-    background-color: transparent;
-    border: 1px solid #cccccc;
-    color: #777777;
-    padding: 8px 16px;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    border-radius: 0px;
-    box-sizing: border-box;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.profile-clear-history-btn:hover {
-    border-color: #000000;
-    color: #000000;
-    background-color: #fafafa;
-}
-
-.admin-toggle-btn {
-    background-color: #ffffff;
-    border: none;
-    border-radius: 100%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-sizing: border-box;
-    padding: 0;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.admin-toggle-btn:hover {
-    transform: translateY(-2px);
-}
-
-.admin-svg-icon {
-    width: 24px;
-    height: 24px;
-    fill: #000000;
-    display: block;
-    transition: fill 0.2s ease;
-}
-
-.admin-toggle-btn:hover .admin-svg-icon,
-.admin-toggle-btn.active .admin-svg-icon {
-    fill: #ffffff;
-}
-
-.admin-workspace-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 24px;
     background-color: #ffffff;
     border: 1px solid #b6b5b5;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    box-sizing: border-box;
 }
 
-.admin-add-product-form {
+main.profile-main-page .admin-user-status h2 {
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 5px 0;
+}
+
+main.profile-main-page .admin-analytics-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+main.profile-main-page .admin-analytics-card {
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+main.profile-main-page .admin-analytics-card.completed-profit {
+    background-color: #f4fbf7;
+    border-color: #82e2b3;
+}
+
+main.profile-main-page .admin-analytics-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #777777;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+main.profile-main-page .admin-analytics-value {
+    font-size: 24px;
+    font-weight: 900;
+    color: #000000;
+}
+
+main.profile-main-page .admin-workspace-panel {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #b6b5b5;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+main.profile-main-page .admin-add-product-form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
     box-sizing: border-box;
-    margin-top: 10px;
 }
 
-.admin-section-label,
-.admin-builder-header span {
+main.profile-main-page .admin-section-label,
+main.profile-main-page .admin-builder-header span {
     font-size: 13px;
     font-weight: 900;
     color: #000000;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 5px;
+    margin-top: 10px;
 }
 
-.admin-add-product-form input[type="text"],
-.admin-add-product-form input[type="number"],
-.admin-add-product-form select {
+main.profile-main-page .admin-add-product-form input[type="text"],
+main.profile-main-page .admin-add-product-form input[type="number"],
+main.profile-main-page .admin-add-product-form select {
     padding: 14px 16px;
     font-size: 15px;
     border: 1px solid #000000;
     border-radius: 0px;
     outline: none;
-    font-family: 'AdihausDIN', Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     width: 100%;
     background-color: #ffffff;
-    transition: all 0.2s ease;
-    letter-spacing: 0.3px;
+    transition: background-color 0.2s ease;
 }
 
-.admin-add-product-form input[type="text"]::placeholder,
-.admin-add-product-form input[type="number"]::placeholder {
-    color: #686868;
-}
-
-.admin-add-product-form input:focus,
-.admin-add-product-form select:focus {
+main.profile-main-page .admin-add-product-form input:focus,
+main.profile-main-page .admin-add-product-form select:focus {
     background-color: #fafafa;
 }
 
-.admin-add-product-form select {
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://w3.org' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 14px;
-    padding-right: 40px;
-    cursor: pointer;
-}
-
-.admin-mode-toggle-group {
+main.profile-main-page .admin-mode-toggle-group {
     display: flex;
     gap: 24px;
     margin-bottom: 10px;
@@ -478,23 +303,18 @@
     padding-bottom: 15px;
 }
 
-.admin-mode-toggle-group .admin-clickable-label {
+main.profile-main-page .admin-mode-toggle-group .admin-clickable-label {
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 700;
     text-transform: uppercase;
     font-size: 13px;
     letter-spacing: 0.5px;
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 10px;
 }
 
-.admin-clickable-label-checkbox {
-    display: flex;
-    gap: 15px;
-    font-weight: 700;
-}
-
-.admin-mode-toggle-group input[type="radio"] {
+main.profile-main-page .admin-mode-toggle-group input[type="radio"] {
     appearance: none;
     width: 18px;
     height: 18px;
@@ -505,111 +325,94 @@
     display: grid;
     place-content: center;
     cursor: pointer;
-    transition: all 0.15s ease;
-    aspect-ratio: 1/1;
-    flex-shrink: 0;
 }
 
-.admin-mode-toggle-group input[type="radio"]::before {
+main.profile-main-page .admin-mode-toggle-group input[type="radio"]::before {
     content: "";
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     transform: scale(0);
     transition: 0.15s transform ease-in-out;
     background-color: #0051BA;
 }
 
-.admin-mode-toggle-group input[type="radio"]:checked::before {
+main.profile-main-page .admin-mode-toggle-group input[type="radio"]:checked::before {
     transform: scale(1);
 }
 
-.admin-checkbox-selector-grid {
+main.profile-main-page .admin-checkbox-selector-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     background-color: #ffffff;
-    padding: 0;
-    border-radius: 0;
-    border: none;
     box-sizing: border-box;
 }
 
-.admin-selectable-checkbox-item {
+main.profile-main-page .admin-selectable-checkbox-item {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
     border: 1px solid #cccccc;
     padding: 12px 20px;
-    border-radius: 0px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 700;
     user-select: none;
     box-sizing: border-box;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.15s ease;
     color: #000000;
 }
 
-.admin-selectable-checkbox-item input[type="checkbox"] {
+main.profile-main-page .admin-selectable-checkbox-item input[type="checkbox"] {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
-    margin: 0;
 }
 
-.admin-selectable-checkbox-item:hover {
+main.profile-main-page .admin-selectable-checkbox-item:hover {
     border-color: #000000;
     background-color: #f5f5f5;
 }
 
-.admin-selectable-checkbox-item:has(input:checked) {
+main.profile-main-page .admin-selectable-checkbox-item:has(input:checked) {
     background-color: #0051BA;
     border-color: #0051BA;
     color: #ffffff;
 }
 
-.sizes-grid {
+main.profile-main-page .sizes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
     width: 100%;
     gap: 8px;
 }
 
-.size-box-item {
-    padding: 12px 0;
-    min-width: 0;
-    width: 100%;
-}
-
-.admin-input-group {
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-
-.admin-input-group .admin-clickable-label {
+main.profile-main-page .admin-clickable-label-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 13px;
-    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 5px;
 }
 
-.admin-input-group input[type="checkbox"] {
+main.profile-main-page .admin-clickable-label-checkbox input[type="checkbox"] {
     appearance: none;
     width: 18px;
     height: 18px;
     border: 2px solid #0051BA;
     outline: none;
-    margin: 0;
     cursor: pointer;
     display: grid;
     place-content: center;
-    transition: all 0.15s ease;
 }
 
-.admin-input-group input[type="checkbox"]::before {
+main.profile-main-page .admin-clickable-label-checkbox input[type="checkbox"]::before {
     content: "✓";
     font-size: 12px;
     font-weight: 900;
@@ -618,15 +421,15 @@
     transition: 0.15s transform ease-in-out;
 }
 
-.admin-input-group input[type="checkbox"]:checked {
+main.profile-main-page .admin-clickable-label-checkbox input[type="checkbox"]:checked {
     background-color: #0051BA;
 }
 
-.admin-input-group input[type="checkbox"]:checked::before {
+main.profile-main-page .admin-clickable-label-checkbox input[type="checkbox"]:checked::before {
     transform: scale(1);
 }
 
-.admin-builder-header {
+main.profile-main-page .admin-builder-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -638,7 +441,7 @@
     box-sizing: border-box;
 }
 
-.admin-add-color-btn {
+main.profile-main-page .admin-add-color-btn {
     background-color: #ffffff;
     color: #000000;
     border: 1px solid #000000;
@@ -652,96 +455,31 @@
     transition: all 0.3s ease;
 }
 
-.admin-add-color-btn:hover {
+main.profile-main-page .admin-add-color-btn:hover {
     background-color: #0051BA;
     color: #ffffff;
-    border: 1px solid #0051BA;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #0051BA;
 }
 
-.admin-color-row-card {
+main.profile-main-page .admin-color-row-card {
     background-color: #fafafa;
     border: 1px solid #e5e5e5;
-    border-radius: 0px;
     padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    box-shadow: none;
     box-sizing: border-box;
     margin-bottom: 16px;
-}
-
-.admin-color-row-card input[type="text"] {
-    border-color: #cccccc;
-    background-color: #ffffff;
-}
-
-.admin-images-inputs-row {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
     width: 100%;
-    box-sizing: border-box;
 }
 
-.admin-images-inputs-row input {
-    padding: 11px 12px;
-    font-size: 13px;
-    border: 1px solid #cccccc;
-    border-radius: 0px;
-}
-
-.admin-submit-form-btn {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    padding: 18px;
-    font-size: 16px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
-    margin-top: 15px;
-    width: 100%;
-    border-radius: 0px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.admin-submit-form-btn:hover {
-    background-color: #0051BA;
-    color: #ffffff;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-.admin-status-success {
-    background-color: #f4fbf7;
-    border: 1px solid #82e2b3;
-    color: #0f7643;
-    padding: 14px;
-    border-radius: 0px;
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.admin-status-error {
-    background-color: #fff5f5;
-    border: 1px solid #fca5a5;
-    color: #c53030;
-    padding: 14px;
-    border-radius: 0px;
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.admin-color-card-header {
+main.profile-main-page .admin-color-card-header {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: -5px;
     width: 100%;
 }
 
-.admin-delete-color-btn {
+main.profile-main-page .admin-delete-color-btn {
     background-color: #ffffff;
     border: 1px solid #b1190b;
     color: #b1190b;
@@ -754,12 +492,26 @@
     transition: all 0.3s ease;
 }
 
-.admin-delete-color-btn:hover {
+main.profile-main-page .admin-delete-color-btn:hover {
     color: #ffffff;
     background-color: #b1190b;
 }
 
-.admin-form-actions-group {
+main.profile-main-page .admin-images-inputs-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+main.profile-main-page .admin-images-inputs-row input {
+    padding: 11px 12px;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+}
+
+main.profile-main-page .admin-form-actions-group {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -768,7 +520,25 @@
     box-sizing: border-box;
 }
 
-.admin-global-delete-product-btn {
+main.profile-main-page .admin-submit-form-btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+main.profile-main-page .admin-submit-form-btn:hover {
+    background-color: #0051BA;
+}
+
+main.profile-main-page .admin-global-delete-product-btn {
     background-color: #ffffff;
     color: #c53030;
     border: 1px solid #c53030;
@@ -778,344 +548,484 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
-    margin-top: 15px;
     width: 100%;
-    border-radius: 0px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
-.admin-global-delete-product-btn:hover {
+main.profile-main-page .admin-global-delete-product-btn:hover {
     background-color: #c53030;
     color: #ffffff;
-    box-shadow: 0 6px 20px rgba(197, 48, 48, 0.15);
 }
 
-.admin-input-label {
-    font-weight: 550;
-}
-
-.admin-crm-orders-section {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.admin-crm-title {
-    font-family: 'AdihausDIN', Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #000000;
-    margin: 0 0 25px 0;
-}
-
-.admin-crm-empty-text {
+main.profile-main-page .admin-status-success {
+    background-color: #f4fbf7;
+    border: 1px solid #82e2b3;
+    color: #0f7643;
+    padding: 14px;
+    font-weight: 700;
     font-size: 14px;
-    color: #888888;
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
-.admin-crm-orders-list {
+main.profile-main-page .admin-status-error {
+    background-color: #fff5f5;
+    border: 1px solid #fca5a5;
+    color: #c53030;
+    padding: 14px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+main.profile-main-page .admin-fullscreen-crm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 4000;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+main.profile-main-page .admin-fullscreen-crm-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+main.profile-main-page .admin-fullscreen-crm-content {
+    width: 65%;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 100%;
-    box-sizing: border-box;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.admin-crm-order-card {
+main.profile-main-page .admin-fullscreen-crm-modal.open .admin-fullscreen-crm-content {
+    transform: translateX(0);
+}
+
+main.profile-main-page .admin-fullscreen-crm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+main.profile-main-page .admin-fullscreen-close-btn {
+    background: none;
+    border: none;
+    font-size: 38px;
+    font-weight: 300;
+    color: #000000;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 0 10px;
+}
+
+main.profile-main-page .admin-fullscreen-close-btn:hover {
+    color: #0051BA;
+    transform: scale(1.1);
+}
+
+main.profile-main-page .admin-fullscreen-orders-scroll-grid {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 25px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    align-content: start;
+}
+
+main.profile-main-page .admin-crm-order-card {
     border: 1px solid #e5e5e5;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     box-sizing: border-box;
-    transition: border-color 0.2s ease;
+    height: fit-content;
 }
 
-.admin-crm-order-card:hover {
-    border-color: #000000;
-}
-
-.admin-crm-order-header {
+main.profile-main-page .admin-crm-order-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #eeeeee;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
-.admin-crm-order-number {
+main.profile-main-page .admin-crm-order-number {
     font-weight: 800;
-    font-size: 16px;
+    font-size: 15px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-.admin-crm-order-date {
-    font-size: 13px;
+main.profile-main-page .admin-crm-order-date {
+    font-size: 12px;
     color: #888888;
-    font-weight: 400;
 }
 
-.admin-crm-customer-info {
-    font-size: 14px;
-    color: #000000;
+main.profile-main-page .admin-crm-customer-info {
+    font-size: 13px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     background-color: #fafafa;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #f0f0f0;
-    box-sizing: border-box;
 }
 
-.admin-crm-customer-row {
+main.profile-main-page .admin-crm-customer-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 10px;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 8px;
 }
 
-.admin-crm-customer-row:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.admin-crm-customer-row span {
+main.profile-main-page .admin-crm-customer-row span {
     color: #777777;
-    font-weight: 500;
     text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.8px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
 }
 
-.admin-crm-customer-row strong {
-    font-weight: 500;
-    color: #000000;
+main.profile-main-page .admin-crm-email-text {
+    color: #555555;
 }
 
-.admin-crm-email-text {
-    color: #777777;
-    font-weight: 400;
-    font-size: 13px;
-}
-
-.admin-crm-order-items {
+main.profile-main-page .admin-crm-order-items {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    background-color: #ffffff;
-    padding: 0;
-    box-sizing: border-box;
+    gap: 12px;
 }
 
-.admin-crm-item-row {
+main.profile-main-page .admin-crm-item-row {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     border-bottom: 1px solid #f5f5f5;
-    padding-bottom: 16px;
+    padding-bottom: 10px;
 }
 
-.admin-crm-item-row:last-child {
+main.profile-main-page .admin-crm-item-row:last-child {
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.admin-crm-item-img {
-    width: 65px;
-    height: 65px;
+main.profile-main-page .admin-crm-item-img {
+    width: 55px;
+    height: 55px;
     object-fit: contain;
-    background-color: #ffffff;
     border: 1px solid #eeeeee;
-    padding: 4px;
+    background-color: #ffffff;
 }
 
-.admin-crm-item-details {
+main.profile-main-page .admin-crm-item-details {
     flex: 1;
 }
 
-.admin-crm-item-details h4 {
-    margin: 0 0 6px 0;
-    font-size: 15px;
-    font-weight: 600;
-    color: #000000;
+main.profile-main-page .admin-crm-item-details h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.admin-crm-item-details p {
+main.profile-main-page .admin-crm-item-details p {
     margin: 0;
-    font-size: 12px;
+    font-size: 11px;
     color: #777777;
-    font-weight: 400;
 }
 
-.admin-crm-item-price {
-    font-weight: 500;
-    font-size: 15px;
-}
-
-.admin-crm-order-footer {
+main.profile-main-page .admin-crm-order-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
     border-top: 1px solid #eeeeee;
+    gap: 10px;
 }
 
-.admin-crm-status-badge {
-    font-size: 11px;
+main.profile-main-page .admin-crm-status-badge {
+    font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 8px 16px;
-    box-sizing: border-box;
-    display: inline-block;
-    transition: all 0.2s ease;
+    padding: 6px 6px;
 }
 
-.admin-crm-total {
-    font-size: 14px;
-    color: #666666;
-    font-weight: 400;
-}
-
-.admin-crm-total strong {
-    font-size: 18px;
-    font-weight: 900;
-    color: #000000;
-    margin-left: 5px;
-}
-
-.admin-crm-status-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.admin-crm-status-badge.pending {
+main.profile-main-page .admin-crm-status-badge.pending {
     background-color: #000000;
     color: #ffffff;
 }
 
-.admin-crm-status-badge.completed {
+main.profile-main-page .admin-crm-status-badge.completed {
     background-color: #e6f4ea;
     color: #137333;
     border: 1px solid #137333;
-    padding: 7px 15px;
 }
 
-.admin-crm-complete-order-btn {
+main.profile-main-page .admin-crm-complete-order-btn {
     background-color: #ffffff;
     color: #000000;
     border: 1px solid #000000;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+main.profile-main-page .admin-crm-complete-order-btn:hover {
+    background-color: #0051BA;
+    border-color: #0051BA;
+    color: #ffffff;
+}
+
+main.profile-main-page .admin-crm-total {
+    font-size: 13px;
+    color: #666666;
+}
+
+main.profile-main-page .admin-crm-total strong {
+    font-size: 16px;
+    color: #000000;
+}
+
+main.profile-main-page .return-card-dashed {
+    border: 1px dashed #b6b5b5;
+    background-color: #fafafa;
+}
+
+main.profile-main-page .profile-card-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+main.profile-main-page .profile-logout-btn {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+main.profile-main-page .profile-logout-btn:hover {
+    background-color: #0051BA;
+    transform: translateY(-2px);
+}
+
+main.profile-main-page .profile-history-section {
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+main.profile-main-page .profile-orders-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+main.profile-main-page .profile-orders-header-row h2 {
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+main.profile-main-page .profile-clear-history-btn {
+    background-color: transparent;
+    border: 1px solid #cccccc;
+    color: #777777;
     padding: 8px 16px;
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
-.admin-crm-complete-order-btn:hover {
-    background-color: #0051BA;
-    border: 1px solid #0051BA;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.admin-dashboard-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 30px;
-    align-items: start;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 20px;
-}
-
-.admin-left-sidebar {
-    background-color: #ffffff;
-    border: 1px solid #b6b5b5;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: sticky;
-    top: 100px;
-    box-sizing: border-box;
-}
-
-.admin-analytics-dashboard {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-}
-
-.admin-analytics-card {
-    background-color: #fafafa;
-    border: 1px solid #e5e5e5;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-sizing: border-box;
-}
-
-.admin-analytics-card.completed-profit {
-    background-color: #f4fbf7;
-    border-color: #82e2b3;
-}
-
-.admin-analytics-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: #777777;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-}
-
-.admin-analytics-value {
-    font-family: 'AdihausDIN', Arial, sans-serif;
-    font-size: 24px;
-    font-weight: 900;
+main.profile-main-page .profile-clear-history-btn:hover {
+    border-color: #000000;
     color: #000000;
 }
 
-.admin-main-content-flow {
-    width: 100%;
-    box-sizing: border-box;
+main.profile-main-page .profile-orders-placeholder {
+    padding: 40px 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
-/*Стили для подтверждения*/
+main.profile-main-page .profile-empty-icon {
+    width: 40px;
+    opacity: 0.3;
+}
+
+main.profile-main-page .profile-orders-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+main.profile-main-page .profile-order-card {
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+main.profile-main-page .profile-order-card-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+main.profile-main-page .profile-order-number {
+    font-weight: bold;
+}
+
+main.profile-main-page .profile-order-date {
+    color: #888888;
+    font-size: 14px;
+}
+
+main.profile-main-page .profile-order-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+main.profile-main-page .profile-order-item-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+main.profile-main-page .profile-order-item-img {
+    width: 50px;
+    height: 40px;
+    object-fit: contain;
+}
+
+main.profile-main-page .profile-order-item-info {
+    flex: 1;
+}
+
+main.profile-main-page .profile-order-item-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+main.profile-main-page .profile-order-item-size {
+    font-size: 12px;
+    color: #777777;
+    text-transform: uppercase;
+}
+
+main.profile-main-page .profile-order-item-price {
+    font-weight: bold;
+}
+
+main.profile-main-page .profile-order-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eeeeee;
+}
+
+main.profile-main-page .profile-order-status-highlight,
+main.profile-main-page .profile-order-total-highlight {
+    color: #0051BA;
+    font-weight: bold;
+}
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.custom-alert-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .custom-confirm-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
-    z-index: 3000;
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-sizing: border-box;
     padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.25s ease;
 }
 
 .custom-confirm-overlay.open {
@@ -1123,52 +1033,84 @@
     visibility: visible;
 }
 
+.custom-alert-card,
 .custom-confirm-card {
     background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 400px;
-    padding: 35px 30px;
-    box-sizing: border-box;
+    padding: 35px;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    transform: scale(0.95) translateY(10px);
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.custom-confirm-overlay.open .custom-confirm-card {
-    transform: scale(1) translateY(0);
+.custom-confirm-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #ff0000;
+    margin: 0 auto 20px auto;
+}
+
+.custom-confirm-title,
+.custom-alert-card h2 {
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 12px 0;
+}
+
+.custom-confirm-message,
+.custom-alert-card p {
+    font-size: 15px;
+    color: #4d4d4d;
+    line-height: 1.5;
+    margin: 0 0 25px 0;
+}
+
+.custom-confirm-actions,
+.custom-alert-actions {
+    display: flex;
+    gap: 15px;
+    width: 100%;
 }
 
 .custom-confirm-actions {
-    display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .custom-confirm-btn-agree {
-    background-color: #0051BA;
+    background-color: #000000;
+    border: 1px solid #000000;
     color: #ffffff;
-    border: 1px solid #0051BA;
     padding: 14px;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 14px;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
     cursor: pointer;
     width: 100%;
-    border-radius: 0px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-sizing: border-box;
-    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .custom-confirm-btn-agree:hover {
-    background-color: #ffffff;
-    color: #0051BA;
+    background-color: #0051BA;
+    border: 1px solid #0051BA;
+}
+
+.custom-alert-btn-confirm {
+    background-color: #D32F2F;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
 }
 
 .custom-confirm-btn-cancel {
@@ -1179,150 +1121,140 @@
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
     cursor: pointer;
     width: 100%;
-    border-radius: 0px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-sizing: border-box;
-    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .custom-confirm-btn-cancel:hover {
-    border: 1px solid #000000;
+    background-color: #D32F2F;
+    border: 1px solid #D32F2F;
     color: #ffffff;
-    background-color: #000000;
 }
 
-.custom-confirm-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    font-weight: 600;
-    margin: 0 auto 20px auto;
-    color: #b50018;
-    box-sizing: border-box;
-}
-
-.custom-alert-warning-icon,
-.custom-alert-warnign-icon {
-    width: 60px;
-    height: 60px;
-    color: #D32F2F;
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin: 0 auto 20px auto;
-    box-sizing: border-box;
-}
-
-@media (min-width: 1025px) {
-    body .profile-main-page {
-        max-width: 96% !important;
-        width: 100% !important;
-        padding-left: 20px;
-        padding-right: 20px;
-        box-sizing: border-box;
+@media (max-width: 768px) {
+    
+    main.profile-main-page {
+        padding-top: 100px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
-    body .profile-container {
-        max-width: 100% !important;
-        width: 100% !important;
+    main.profile-main-page .profile-hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 15px;
     }
 
-    body .admin-dashboard-grid {
-        display: grid !important;
-        grid-template-columns: 260px 1fr 440px !important;
-        gap: 30px !important;
-        align-items: flex-start;
+    main.profile-main-page .profile-header-title-wrapper h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    main.profile-main-page .profile-settings-dropdown-wrapper {
+        flex-direction: column;
+        gap: 12px;
         width: 100%;
-        box-sizing: border-box;
     }
 
-    body .admin-main-content-flow {
-        display: contents !important;
+    main.profile-main-page .admin-mode-toggle-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 24px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eeeeee;
+        padding-bottom: 15px;
     }
 
-    body .admin-left-sidebar {
-        position: sticky;
-        top: 120px;
+    main.profile-main-page .admin-header-crm-nav {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+
+    main.profile-main-page .admin-crm-nav-link {
+        padding: 10px 5px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    main.profile-main-page .admin-dashboard-grid {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        width: 100%;
     }
 
-    body .admin-workspace-panel {
-        grid-column: 2 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        border: 1px solid #b6b5b5 !important;
-        border-radius: 12px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
-        box-sizing: border-box;
-    }
-
-    body .admin-right-crm-column {
-        grid-column: 3 !important;
-        position: sticky;
-        top: 120px;
+    main.profile-main-page .admin-main-content-flow {
         display: flex;
         flex-direction: column;
-        gap: 20px;
         width: 100%;
-        box-sizing: border-box;
     }
 
-    body .admin-crm-orders-section {
-        height: 380px !important;
-        max-height: 380px !important;
-        overflow-y: auto !important;
-        background-color: #ffffff;
-        border: 1px solid #b6b5b5 !important;
-        padding: 25px !important;
-        border-radius: 12px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
-        box-sizing: border-box;
-        margin-top: 0 !important;
+    main.profile-main-page .admin-left-sidebar {
+        position: relative;
+        top: 0;
+        width: 100%;
+        padding: 20px;
     }
 
-    body .admin-crm-returns-container {
-        height: 320px !important;
-        max-height: 320px !important;
-        overflow-y: auto !important;
-        background-color: #ffffff;
-        border: 1px solid #b6b5b5 !important;
-        padding: 25px !important;
-        border-radius: 12px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
-        box-sizing: border-box;
+    main.profile-main-page .admin-analytics-dashboard {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
     }
 
-    body .return-card-dashed {
-        border: 1px dashed #b6b5b5 !important;
-        background-color: #fafafa !important;
-        padding: 15px !important;
-        border-radius: 8px !important;
-        margin-bottom: 12px;
+    main.profile-main-page .admin-workspace-panel {
+        padding: 20px 15px;
     }
 
-    body .admin-crm-orders-section::-webkit-scrollbar,
-    body .admin-crm-returns-container::-webkit-scrollbar {
-        width: 5px;
+    main.profile-main-page .admin-images-inputs-row {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
     }
-    body .admin-crm-orders-section::-webkit-scrollbar-track,
-    body .admin-crm-returns-container::-webkit-scrollbar-track {
-        background: transparent;
+
+    main.profile-main-page .admin-images-inputs-row input {
+        font-size: 12px;
+        padding: 10px;
     }
-    body .admin-crm-orders-section::-webkit-scrollbar-thumb,
-    body .admin-crm-returns-container::-webkit-scrollbar-thumb {
-        background-color: #000000;
-        border-radius: 10px;
+
+    main.profile-main-page .admin-fullscreen-crm-content {
+        width: 100vw;
+        padding: 25px 15px;
+        gap: 20px;
+    }
+
+    main.profile-main-page .admin-fullscreen-orders-scroll-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding-right: 0;
+    }
+
+    main.profile-main-page .admin-crm-order-card {
+        padding: 15px;
+    }
+
+    main.profile-main-page .profile-card-section {
+        flex-direction: column;
+        padding: 20px 15px;
+    }
+
+    main.profile-main-page .profile-logout-btn {
+        width: 100%;
+        padding: 14px;
+    }
+
+    main.profile-main-page .profile-history-section {
+        padding: 20px 15px;
+    }
+
+    main.profile-main-page .profile-orders-header-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    main.profile-main-page .profile-card-section.profile-settings-panel {
+        width: 300px;
     }
 }

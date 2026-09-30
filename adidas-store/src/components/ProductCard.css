@@ -46,7 +46,7 @@
 
 .fav-btn {
     position: absolute;
-    top: 15px;
+    top: 25px;
     right: 15px;
     background: none;
     border: none;
@@ -62,6 +62,7 @@
     margin: 0;
     color: transparent;
     -webkit-text-stroke: 2px #000000;
+    -webkit-tap-highlight-color: transparent;
     transition: all 0.2s ease;
 }
 
@@ -71,6 +72,8 @@
 
 .fav-btn.active {
     color: #0051BA;
+    outline: none;
+    background: transparent;
     -webkit-text-stroke: 0px transparent;
 }
 
@@ -80,14 +83,14 @@
     object-fit: contain;
     display: block;
     flex-shrink: 0;
+    pointer-events: none;
 }
 
-.new-badge-label {
+.new-badge-label,
+.sale-badge-label {
     position: absolute;
-    top: 0px;
-    left: 5px;
-    background-color: #0051BA;
-    color: #ffffff;
+    left: 12px;
+    margin: 0;
     padding: 5px 10px;
     font-size: 11px;
     font-weight: 800;
@@ -95,22 +98,30 @@
     letter-spacing: 1px;
     border-radius: 4px;
     z-index: 5;
+    display: inline-block;
+    width: fit-content;
+}
+
+.new-badge-label {
+    top: 0px;
+    background-color: #0051BA;
+    color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 81, 186, 0.25);
 }
 
 .sale-badge-label {
-    position: absolute;
-    top: 15px;
-    right: 15px;
     background-color: #E22120;
     color: #ffffff;
     font-family: 'AdihausDIN', Arial, Helvetica, sans-serif;
-    font-size: 12px;
     font-weight: 900;
-    padding: 5px 10px;
-    letter-spacing: 0.5px;
-    z-index: 10;
-    border-radius: 4px;
+}
+
+.new-badge-label ~ .sale-badge-label {
+    top: 40px;
+}
+
+.product-card-image-wrapper:not(:has(.new-badge-label)) .sale-badge-label {
+    top: 0px;
 }
 
 .product-card-price-block {
@@ -152,14 +163,32 @@
 /*МОБИЛКА ДЛЯ КАРТОЧКИ ТОВАРА*/
 @media (max-width: 768px) {
     body .product-card-image-wrapper .sale-badge-label {
-        position: relative;
-        top: 15px;
-        right: unset;
+         position: absolute;
         display: inline-block;
-        margin: 10px 0 5px 0;
-        font-size: 11px;
-        padding: 4px 8px;
-        align-self: flex-start;
+        margin: 0;
+        font-weight: normal;
+        align-self: unset;
+    }
+
+    .new-badge-label,
+    .sale-badge-label {
+        left: 8px;
+        padding: 3px 6px;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        border-radius: 3px;
+    }
+
+    .new-badge-label {
+        font-weight: normal;
+    }
+
+    .new-badge-label ~ .sale-badge-label {
+        top: 25px;
+    }
+
+    .product-card-image-wrapper:not(:has(.new-badge-label)) .sale-badge-label {
+        top: 0px;
     }
 
     body .main .products-container .product-card {
@@ -199,7 +228,7 @@
 
     .fav-btn {
         top: 15px;
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
     }
 }
