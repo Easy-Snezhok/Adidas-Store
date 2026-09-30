@@ -160,6 +160,20 @@
     margin: 0;
 }
 
+.modal-new-discounted-price {
+    font-size: 20px;
+    font-weight: 900;
+    color: #E22120;
+}
+
+.modal-old-struck-price {
+    font-size: 18px;
+    color: #888888;
+    text-decoration: line-through;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
 .modal-option-block h3 {
     margin: 0 0 10px 0;
     font-size: 16px;

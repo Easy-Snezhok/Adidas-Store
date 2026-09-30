@@ -568,17 +568,17 @@ function App() {
               <div className="contact-links-container">
                 <a href="tel:+78005553535" className="contact-premium-btn phone-btn">
                   <span className="contact-btn-label">Позвонить на горячую линию:</span>
-                  <strong className="contact-btn-value">+7 (800) 555-35-35</strong>
+                  <strong className="contact-btn-value">+7 (900) 900 - 00 - 00</strong>
                 </a>
 
                 <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="contact-premium-btn telegram-btn">
                   <span className="contact-btn-label">Написать в Telegram:</span>
-                  <strong className="contact-btn-value">@adidas_shop_support</strong>
+                  <strong className="contact-btn-value">@adidas_store_kappa</strong>
                 </a>
 
                 <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="contact-premium-btn gmail-btn">
                   <span className="contact-btn-label">Написать на Почту:</span>
-                  <strong className="contact-btn-value">support@adidas-store.ru</strong>
+                  <strong className="contact-btn-value">adidasstoresupport@gmail.com</strong>
                 </a>
               </div>
 

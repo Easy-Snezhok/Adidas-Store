@@ -49,7 +49,18 @@ function Favorites({favoriteItems, onToggleFavorite, onClearFavorites, onOpenPro
                                         >
                                             {item.title}
                                         </h4>
-                                        <p>{item.price} ₽</p>
+                                        {item.salePercent > 0 ? (
+                                            <p className="product-card-price-block">
+                                            <span className="new-discounted-price">
+                                                {Math.round(item.price * (1 - item.salePercent / 100))} <span className="currency-rub">₽</span>
+                                            </span>
+                                            <span className="old-struck-price">
+                                                {item.price} <span className="currency-rub">₽</span>
+                                            </span>
+                                            </p>
+                                        ) : (
+                                            <p>{item.price} <span className="currency-rub">₽</span></p>
+                                        )}
                                     </div>
                                 </div>
                                 <button

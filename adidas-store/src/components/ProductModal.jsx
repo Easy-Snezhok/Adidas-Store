@@ -103,7 +103,20 @@ function ProductModal({isOpen, product, onClose, onAddToCart, favorites = [], on
 
                         <div className="product-modal-right">
                             <h2 id="modalProductTitle">{displayProduct.title}</h2>
-                            <p className="modal-product-price" id="modalProductPrice">{displayProduct.price} <span className="currency-rub">₽</span></p>
+                            {displayProduct.salePercent > 0 ? (
+                                <div className="modal-product-price-block">
+                                    <span className="modal-new-discounted-price">
+                                        {Math.round(displayProduct.price * (1 - displayProduct.salePercent / 100))} <span className="currency-rub">₽</span>
+                                    </span>
+                                    <span className="modal-old-struck-price">
+                                        {displayProduct.price} <span className="currency-rub">₽</span>
+                                    </span>
+                                </div>
+                            ) : (
+                                <p className="modal-product-price" id="modalProductPrice">
+                                    {displayProduct.price} <span className="currency-rub">₽</span>
+                                </p>
+                            )}
 
                             <div className="modal-option-block">
                                 <h3>Цвет:</h3>

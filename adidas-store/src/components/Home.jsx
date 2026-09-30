@@ -100,7 +100,8 @@ function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setG
                             } else {
                                 const finalProduct = {
                                     ...product,
-                                    selectedColor: defaultColor
+                                    selectedColor: defaultColor,
+                                    salePercent: product.salePercent || 0
                                 };
                                 onToggleFavorite(finalProduct);
                             }

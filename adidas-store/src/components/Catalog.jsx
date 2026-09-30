@@ -162,7 +162,8 @@ function Catalog({onOpenProduct, favorites, onToggleFavorite, selectedGender, se
                                     } else {
                                         const finalProduct = {
                                             ...product,
-                                            selectedColor: defaultColor
+                                            selectedColor: defaultColor,
+                                            salePercent: product.salePercent || 0
                                         };
                                         onToggleFavorite(finalProduct);
                                     }
