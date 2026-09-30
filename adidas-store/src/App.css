@@ -32,10 +32,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #000000;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -webkit-text-fill-color: currentColor;
-    -webkit-text-stroke: 0px transparent;
+    -webkit-text: 'AdihausDIN', Arial, Helvetica, sans-serif;
 }
 
 .currency-rub {
