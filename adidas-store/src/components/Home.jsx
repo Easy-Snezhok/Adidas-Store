@@ -9,6 +9,18 @@ function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setG
     <main>
         <div className="home-page">
       <section className="hero-section">
+        <video 
+            className="hero-video-bg"
+            src="/superstar-bg.mp4.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+        >
+        </video>
+
+        <div className="hero-video-overlay"></div>
+
         <div className="container-content">
             <span className="subtitle">ОРИГИНАЛЬНАЯ КОЛЛЕКЦИЯ</span>
             <h1>Adidas Superstar</h1>
@@ -25,7 +37,7 @@ function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setG
                 Купить сейчас
             </button>
         </div>
-            <img src="images/Logo_superstar.png" className="hero-image" alt="Adidas Superstar" />
+
       </section>
       
       <section className="hero-category">
