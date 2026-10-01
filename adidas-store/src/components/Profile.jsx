@@ -22,6 +22,7 @@ const [category, setCategory] = useState('classic');
 const [gender, setGender] = useState([]);
 const [sizes, setSizes] = useState([]);
 const [isNew, setIsNew] = useState(false);
+const [isArrival, setIsArrival] = useState(false);
 const [salePercent, setSalePercent] = useState('');
 
 const [colorsInput, setColorsInput] = useState([
@@ -65,6 +66,26 @@ useEffect(() => {
         checkAdminRole();
 }, [user]);
 
+useEffect(() => {
+    if (!isSettingsOpen) return;
+
+    const handleOutsideClick = (event) => {
+        const isClickOnToggle = event.target.closest('.profile-settings-toggle-btn');
+        const isClickInsidePanel = event.target.closest('.profile-setting-panel');
+
+        if (!isClickOnToggle && !isClickInsidePanel) {
+            setIsSettingsOpen(false);
+            setSettingsError('');
+        }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+        document.removeEventListener('click', handleOutsideClick);
+    };
+}, [isSettingsOpen]);
+
 const handleProductSelectForEdit = (productId) => {
     setSelectedProductId(productId);
 
@@ -75,6 +96,7 @@ const handleProductSelectForEdit = (productId) => {
         setGender([]);
         setSizes([]);
         setIsNew(false);
+        setIsArrival(false);
         setSalePercent('');
         setColorsInput([{ id: 'init_white', name: 'white', value: '#ffffff', images: ['', '', '', ''] }]);
         return;
@@ -88,6 +110,7 @@ const handleProductSelectForEdit = (productId) => {
         setGender(currentProduct.gender || []);
         setSizes(currentProduct.sizes || []);
         setIsNew(currentProduct.isNew || false);
+        setIsArrival(currentProduct.isArrival || false);
         setSalePercent(currentProduct.salePercent !== undefined ? currentProduct.salePercent : '');
 
         if (currentProduct.colors && currentProduct.colors.length > 0) {
@@ -239,6 +262,7 @@ const handleAddProductSubmit = async (e) => {
                 images: cleanImages,
                 colors: cleanColorsForFirestore,
                 isNew: isNew,
+                isArrival: isArrival,
                 salePercent: salePercent !== '' ? Number(salePercent) : 0
             };
         
@@ -313,7 +337,7 @@ return (
                     <h1>{isAdminView ? "Панель Администратора" : "Личный кабинет"}</h1>
                 </div>
                 <p className="profile-subtitle-text">
-                    Рады видеть вас снова, <span className="profile-user-email">{user.displayName || user.email}</span>!
+                    Рады видеть вас, <span className="profile-user-email">{user.displayName || user.email}</span>!
                 </p>
 
                 <div className="profile-settings-dropdown-wrapper">
@@ -487,6 +511,18 @@ return (
                                             onChange={(e) => setIsNew(e.target.checked)} 
                                         />
                                         Отметить как НОВОЕ
+                                    </label>
+                                </div>
+
+                                <div className="admin-input-group">
+                                    <label className="admin-clickable-label-checkbox">
+                                        <input
+                                            type="checkbox"
+                                            className="checkbox"
+                                            checked={isArrival}
+                                            onChange={(e) => setIsArrival(e.target.checked)}
+                                        />
+                                        Вывести в Новые проступления на Главную
                                     </label>
                                 </div>
 

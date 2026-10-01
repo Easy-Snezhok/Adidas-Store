@@ -1,9 +1,10 @@
 import ProductCard from './ProductCard';
-import { products } from '../productsData';
 import './Home.css';
 
-function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setGenderFilter, onRemoveModel}) {
-  const newArrivals = [products[9], products[7], products[16]];
+function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setGenderFilter, onRemoveModel, products}) {
+  const newArrivals = Array.isArray(products)
+    ? products.filter(product => product && (product.isArrival === true || product.isArrival === 'true')).slice(0, 3)
+    : [];
 
   return (
     <main>
@@ -89,20 +90,29 @@ function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setG
             {newArrivals.map((product) => {
                 const isFav = favorites.some((favItem) => favItem.id === product.id);
 
-                const defaultColor = product.colors && product.colors[0] ? product.colors[0].name : 'white';
+                const defaultColor = product.colors && product.colors[0] 
+                    ? product.colors[0].name 
+                    : 'white';
+
+                 let displayImage = 'icon/Basket.svg';
+                if (product.images) {
+                    if (typeof product.images === 'string') {
+                        displayImage = product.images;
+                    } else if (product.images[defaultColor]) {
+                        const targetImages = product.images[defaultColor];
+                        displayImage = Array.isArray(targetImages) ? targetImages[0] : targetImages;
+                    } else {
+                        const fallbackImages = Object.values(product.images)[0];
+                        displayImage = Array.isArray(fallbackImages) ? fallbackImages[0] : fallbackImages;
+                    }
+                }
 
                 return (
                     <ProductCard
                         key={product.id}
                         title={product.title}
                         price={product.price}
-                        image={
-                            typeof product.images === 'string'
-                            ? product.images
-                            : Array.isArray(Object.values(product.images)[0])
-                                ? Object.values(product.images)[0][0]
-                                : Object.values(product.images)[0]
-                        }
+                        image={displayImage}
                         onBuyClick={() => onOpenProduct(product)}
                         onCardClick={() => onOpenProduct(product)}
                         isFavorite={isFav}
