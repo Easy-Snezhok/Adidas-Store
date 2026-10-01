@@ -28,10 +28,14 @@ function Home({changePage, onOpenProduct, favorites = [], onToggleFavorite, setG
             <button
                 className="hero-btn"
                 onClick={() => {
-                    const superstarProduct = products.find(item => item.id === 4);
+                    const superstarProduct = products.find(item => 
+                        item && item.title && item.title.toLowerCase().includes('superstar')
+                    );
+
                     if (superstarProduct) {
                         onOpenProduct(superstarProduct);
-                        changePage('catalog');
+                    } else if (products && products.length > 0) {
+                        onOpenProduct(products[0]);
                     }
                 }}
             >

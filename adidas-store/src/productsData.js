@@ -149,7 +149,7 @@ export const products = [
         colors: [
             {name: 'white', value: '#ffffff'},
             {name: 'black', value: '#000000'},
-            {name: 'multicolor1', value: 'linear-gradient(90deg, #066C30 13%, #FFEC1C 37%, #0231A4 53%, #BA0412 91%)'},
+            {name: 'multicolor1', value: 'linear-gradient(90deg, #066C30 13%, #FFEC1C 13%, #FFEC1C 53%, #0231A4 53%, #0231A4 91%, #BA0412 91%)'},
             {name: 'multicolor2', value: 'linear-gradient(90deg, #E1E0E3 50%, #E55300 50%)'},
             {name: 'multicolor3', value: 'linear-gradient(90deg, #DDDEE2 50%, #FF0015 50%)'}
         ]
